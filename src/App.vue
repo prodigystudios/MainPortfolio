@@ -1,30 +1,27 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
   <router-view/>
 </template>
 
 <style>
+  @import url("https://fonts.googleapis.com/css?family=Outfit");
+  @import url("https://fonts.googleapis.com/css?family=Kodchasan");
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+
+  font-family:Outfit;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color:white;
 }
 
-nav {
-  padding: 30px;
+body {
+  background: linear-gradient(180.06deg, #0A0A32 52.13%, #05051F 99.95%), linear-gradient(180deg, #05051F 0%, rgba(14, 14, 100, 0.1) 33.48%);  
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+h1 {
+  font-family: Kodchasan;
 }
-
-nav a.router-link-exact-active {
-  color: #42b983;
+p {
+  font-family: Outfit;
 }
 </style>
+
