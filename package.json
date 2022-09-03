@@ -8,6 +8,8 @@
     "deploy": "deploy.sh"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.7.0",
+    "emailjs-com": "^3.2.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },

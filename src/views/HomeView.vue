@@ -8,19 +8,40 @@
       <button @click="ScrollToAnchor('project-section')">
         <h4>Projekt</h4>
       </button>
-      <h4>Kontakt</h4>
+      <button @click="ScrollToAnchor('contact-section')">
+        <h4>Kontakt</h4>
+      </button>
     </div>
   </nav>
-
-  <div ref="hero-section" class="hero-section">
-    <hero-section />
+<div class="wrapper">
+  <section>
+    <div ref="hero-section" class="hero-section">
+      <hero-section />
+    </div>
+  </section>
+  <section>
+    <div ref="knowledge-section" class="knowledge-section">
+      <knowledge-section />
+    </div>
+  </section>
+  <section>
+    <div ref="project-section" class="project-section">
+      <project-section />
+    </div>
+  </section>
+  <section>
+    <div ref="contact-section" class="contact-section">
+      <Contact-section />
+      <div class="top-btn">
+    <button @click="ScrollToAnchor('hero-section')" class="btn">
+      <div class="right-arrow"></div>
+      <div class="left-arrow"></div>
+    </button>
   </div>
-  <div ref="knowledge-section" class="knowledge-section">
-    <knowledge-section />
-  </div>
-  <div ref="project-section" class="project-section">
-    <project-section />
-  </div>
+    </div>
+  </section>
+  
+</div>
 
 </template>
 
@@ -28,26 +49,27 @@
 import HeroSection from '@/components/HeroSection.vue';
 import KnowledgeSection from '@/components/KnowledgeSection.vue';
 import ProjectSection from '@/components/ProjectSection.vue';
+import ContactSection from '@/components/ContactSection.vue';
 export default {
-  components: { HeroSection, KnowledgeSection, ProjectSection },
+  components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection },
 
   methods: {
     ScrollToAnchor(refName) {
       const el = this.$refs[refName];
       el.scrollIntoView({ behavior: 'smooth' })
-    }
+    },
   }
 }
 </script>
 
-
 <style scoped>
+
 nav
 {
   position: fixed;
   top: 0;
   width: 100%;
-  background: #0F0F32;
+  background: #101036;
   height: 112px;
 }
 
@@ -68,16 +90,72 @@ nav h1
   gap: 200px;
 }
 
+
 button
 {
   font-family: Outfit;
   background: none;
   border: none;
+  font-size: 18px;
   color: white;
+  text-decoration: none;
 }
 
 button:hover
 {
   cursor: pointer;
+}
+
+section {
+  scroll-behavior: smooth;
+  scroll-snap-align:center;
+}
+.hero-section
+{
+  scroll-behavior: smooth;
+  scroll-margin-top: 110px;
+}
+
+.project-section
+{
+  scroll-behavior: smooth;
+  scroll-margin-top: 220px;
+}
+.contact-section {
+  scroll-margin-top: 300px;
+}
+
+.top-btn{
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.btn {
+  width:100px;
+  height: 100px;
+  background: white;
+  border-radius: 200px;
+  transition: 0.2s ease;
+}
+.btn:hover{
+  background-color: rgba(109, 107, 243, 0.767);
+}
+.left-arrow {
+  position: relative;
+  left:25px;
+  bottom:31px;
+  width: 10px;
+  height: 50px;
+  background-color: #101036;
+  transform:rotate(230deg);
+}
+.right-arrow {
+  position: relative;
+  left:55px;
+  top:20px;
+  width: 10px;
+  height: 50px;
+  background-color: #101036;
+  transform:rotate(135deg);
 }
 </style>

@@ -5,8 +5,13 @@
 <style>
   @import url("https://fonts.googleapis.com/css?family=Outfit");
   @import url("https://fonts.googleapis.com/css?family=Kodchasan");
-#app {
 
+  html {
+    overflow-y:scroll;
+    scroll-snap-type:y mandatory;
+    scroll-behavior: smooth;
+  }
+#app {
   font-family:Outfit;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -14,7 +19,9 @@
 }
 
 body {
-  background: linear-gradient(180.06deg, #0A0A32 52.13%, #05051F 99.95%), linear-gradient(180deg, #05051F 0%, rgba(14, 14, 100, 0.1) 33.48%);  
+  background:
+  linear-gradient(180.06deg, #0A0A32 52.13%, #05051F 99.95%), 
+  linear-gradient(180deg, #05051F 0%, rgba(14, 14, 100, 0.1) 33.48%);  
 }
 
 h1 {

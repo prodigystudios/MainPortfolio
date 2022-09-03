@@ -14,8 +14,34 @@
                 <img src="../assets/ikoner/icons8-javascript-32.png" width="44px" height="44px">
             </div>
         </div>
-        <div class="project-card"></div>
-        <div class="project-card"></div>
+        <div class="project-card">
+            <h2>Väder applikation</h2>
+            <img class="main-image" src="../assets/Projectbilder/Home.png">
+            <section class="aling-text-section">
+                <p>Github link: https://github.com/prodigystudios/weatherapp</p>
+                <p>Live site link:https://prodigystudios.github.io/weatherapp/#/</p>
+            </section>
+            <h5>Used tech</h5>
+            <div class="sub-container">
+                <img src="../assets/ikoner/icons8-html-5-32.png" width="44px" height="44px">
+                <img src="../assets/ikoner/icons8-css3-32.png" width="44px" height="44px">
+                <img src="../assets/ikoner/icons8-javascript-32.png" width="44px" height="44px">
+            </div>
+        </div>
+        <div class="project-card">
+            <h2>Väder applikation</h2>
+            <img class="main-image" src="../assets/Projectbilder/Home.png">
+            <section class="aling-text-section">
+                <p>Github link: https://github.com/prodigystudios/weatherapp</p>
+                <p>Live site link:https://prodigystudios.github.io/weatherapp/#/</p>
+            </section>
+            <h5>Used tech</h5>
+            <div class="sub-container">
+                <img src="../assets/ikoner/icons8-html-5-32.png" width="44px" height="44px">
+                <img src="../assets/ikoner/icons8-css3-32.png" width="44px" height="44px">
+                <img src="../assets/ikoner/icons8-javascript-32.png" width="44px" height="44px">
+            </div>
+        </div>
     </div>
 </template>
 
@@ -35,6 +61,7 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     gap: 50px;
+    margin-top: 180px;
     margin-bottom: 100px;
 }
 

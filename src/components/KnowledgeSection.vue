@@ -7,12 +7,12 @@
 
                 <div class="aling-items">
                     <img src="../assets/ikoner/icons8-html-5-32.png" width="44px" height="44px" alt="html icon">
-                    <p>html</p>
+                    <p>Html</p>
                 </div>
 
                 <div class="aling-items">
                     <img src="../assets/ikoner/icons8-css3-32.png" width="44px" height="44px" alt="css icon">
-                    <p>css</p>
+                    <p>Css</p>
                 </div>
 
                 <div class="aling-items">
@@ -73,6 +73,7 @@ export default {
 </script>
 
 <style scoped>
+
 .container
 {
     width: 100%;
@@ -92,7 +93,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin: 0px 150px;
-    gap: 63vh;
+    gap: 62vh;
     row-gap: 15px;
 }
 
@@ -110,9 +111,15 @@ export default {
     text-decoration: underline;
     font-size: 30px;
 }
+.sub-container p {
+    font-size: 18px;
+    margin: 0;
+}
 
 .aling-items
 {
     display: flex;
+    gap:5px;
+    align-items: center;
 }
 </style>

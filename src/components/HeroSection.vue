@@ -3,11 +3,10 @@
         <h1>Blivande front-end utvecklare med stort intresse för back-end utveckling
             <p>Hej och välkomna till min portfolio. <br/>
             Mitt namn är William Ali 29 årig utvecklare från sverige.<br/>
-            Har jobbat inom byggbranchen i över 10 år nu och är på min resa att byta karriär till utvecklare!<br/>
+            Har jobbat inom byggbranchen i över 10 och är nu på min resa att byta karriär till utvecklare!<br/>
             Har länge haft intresse för att skapa saker.<br/>
             Började min resa för att jag ville skapa spel och det ledde mig senare in på att jag ville testa på<br/>
             webbutveckling och fastnat för det helt. Både för front- end och back-end utveckling.</p>
-            <p>Klicka här för att se några av projekten jag har skapat</p>
         </h1>
         <img class="img" src="../assets/Portrait/Självporträttlol.jpg">
     </div>
