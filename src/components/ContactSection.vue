@@ -143,6 +143,7 @@ input[type=submit]
     cursor: pointer;
     width: 100%;
     margin-top: 20px;
+    transition: 0.5s ease;
 }
 
 input[type=submit]:hover

@@ -1,57 +1,95 @@
 <template>
     <div class="container">
-        <div class="project-card">
-            <h2>Väder applikation</h2>
-            <img class="main-image" src="../assets/Projectbilder/Home.png">
+        <div class="project-card" v-for="project in projects" :key="project.id">
+            <router-link :to="'/project/' + project.id">
+            <h2>{{ project.title }}</h2>
+            <img class="main-image" :src="project.img">
             <section class="aling-text-section">
-                <p>Github link: https://github.com/prodigystudios/weatherapp</p>
-                <p>Live site link:https://prodigystudios.github.io/weatherapp/#/</p>
+                <p>Github link: {{ project.githubLink }}</p>
+                <p>Live site link: {{ project.liveLink }}</p>
             </section>
-            <h5>Used tech</h5>
+            <h5>Använda Tekniker</h5>
             <div class="sub-container">
-                <img src="../assets/ikoner/icons8-html-5-32.png" width="44px" height="44px">
-                <img src="../assets/ikoner/icons8-css3-32.png" width="44px" height="44px">
-                <img src="../assets/ikoner/icons8-javascript-32.png" width="44px" height="44px">
+                <div v-for="(icon, index) in project.icons" :key="index">
+                    <img class="icon-scale" :src="icon.icon">
+                </div>
             </div>
-        </div>
-        <div class="project-card">
-            <h2>Väder applikation</h2>
-            <img class="main-image" src="../assets/Projectbilder/Home.png">
-            <section class="aling-text-section">
-                <p>Github link: https://github.com/prodigystudios/weatherapp</p>
-                <p>Live site link:https://prodigystudios.github.io/weatherapp/#/</p>
-            </section>
-            <h5>Used tech</h5>
-            <div class="sub-container">
-                <img src="../assets/ikoner/icons8-html-5-32.png" width="44px" height="44px">
-                <img src="../assets/ikoner/icons8-css3-32.png" width="44px" height="44px">
-                <img src="../assets/ikoner/icons8-javascript-32.png" width="44px" height="44px">
-            </div>
-        </div>
-        <div class="project-card">
-            <h2>Väder applikation</h2>
-            <img class="main-image" src="../assets/Projectbilder/Home.png">
-            <section class="aling-text-section">
-                <p>Github link: https://github.com/prodigystudios/weatherapp</p>
-                <p>Live site link:https://prodigystudios.github.io/weatherapp/#/</p>
-            </section>
-            <h5>Used tech</h5>
-            <div class="sub-container">
-                <img src="../assets/ikoner/icons8-html-5-32.png" width="44px" height="44px">
-                <img src="../assets/ikoner/icons8-css3-32.png" width="44px" height="44px">
-                <img src="../assets/ikoner/icons8-javascript-32.png" width="44px" height="44px">
-            </div>
+        </router-link>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'ProjectSection'
+    name: 'ProjectSection',
+    data() {
+        return {
+            projects: [
+                {
+                    id: 0,
+                    title: 'Väder applikation',
+                    img: require('@/assets/Projectbilder/Home.png'),
+                    githubLink: 'https://github.com/prodigystudios/weatherapp',
+                    liveLink: 'https://prodigystudios.github.io/weatherapp/#/',
+                    icons: [
+                        {
+                            icon: require('@/assets/ikoner/icons8-html-5-32.png'),
+                        },
+                        {
+                            icon: require('@/assets/ikoner/icons8-css3-32.png')
+                        },
+                        {
+                            icon: require('@/assets/ikoner/icons8-javascript-32.png')
+                        },
+                    ]
+                },
+                {
+                    id: 1,
+                    title: 'Väder applikation',
+                    img: require('@/assets/Projectbilder/Home.png'),
+                    githubLink: 'https://github.com/prodigystudios/weatherapp',
+                    liveLink: 'https://prodigystudios.github.io/weatherapp/#/',
+                    icons: [
+                        {
+                            icon: require('@/assets/ikoner/icons8-html-5-32.png'),
+                        },
+                        {
+                            icon: require('@/assets/ikoner/icons8-css3-32.png')
+                        },
+                        {
+                            icon: require('@/assets/ikoner/icons8-javascript-32.png')
+                        },
+                    ]
+                },
+                {
+                    id: 2,
+                    title: 'Väder applikation',
+                    img: require('@/assets/Projectbilder/Home.png'),
+                    githubLink: 'https://github.com/prodigystudios/weatherapp',
+                    liveLink: 'https://prodigystudios.github.io/weatherapp/#/',
+                    icons: [
+                        {
+                            icon: require('@/assets/ikoner/icons8-html-5-32.png'),
+                        },
+                        {
+                            icon: require('@/assets/ikoner/icons8-css3-32.png')
+                        },
+                        {
+                            icon: require('@/assets/ikoner/icons8-javascript-32.png')
+                        },
+                    ]
+                },
+            ]
+        }
+    }
 }
 </script>
 
 <style scoped>
+a {
+    text-decoration: none;
+    color:white;
+}
 .container
 {
     width: 100%;
@@ -73,8 +111,14 @@ export default {
     box-shadow: 7px 12px 22px 4px rgba(0, 0, 0, 0.6);
     border-radius: 20px;
     text-align: center;
+    transition: 0.3s ease;
 }
-.project-card h5 {
+.project-card:hover {
+    outline:1px solid lightcoral;
+}
+
+.project-card h5
+{
     font-size: 22px;
 }
 
@@ -92,8 +136,14 @@ export default {
     gap: 30px;
     justify-content: center;
 }
-.aling-text-section {
+
+.aling-text-section
+{
     text-align: left;
     margin-left: 50px;
+}
+.icon-scale {
+    width: 44px;
+    height: 44px;
 }
 </style>

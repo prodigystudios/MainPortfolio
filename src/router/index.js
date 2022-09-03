@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import singleProjectView from '../views/SingleProjectView.vue'
 
 const routes = [
   {
@@ -7,6 +8,11 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+  {
+    path: '/project/:id',
+    name: 'project',
+    component: singleProjectView
+  }
 ]
 
 const router = createRouter({

@@ -33,7 +33,7 @@ export default {
     margin-top: 50px;
     font-size: 20px;
     font-weight: 400;
-    line-height: 26px;
+    line-height: 30px;
 }
 .img
 {

@@ -112,13 +112,11 @@ section {
 }
 .hero-section
 {
-  scroll-behavior: smooth;
   scroll-margin-top: 110px;
 }
 
 .project-section
 {
-  scroll-behavior: smooth;
   scroll-margin-top: 220px;
 }
 .contact-section {
