@@ -76,7 +76,7 @@ export default {
 .container
 {
     width: 100%;
-    height: 563px;
+    height: 100%;
     background: linear-gradient(180deg, rgba(19, 16, 140, 0.4) 0%, rgba(5, 5, 31, 0.4) 100%);
     margin-bottom: 150px;
 }
@@ -93,6 +93,7 @@ export default {
     flex-wrap: wrap;
     margin: 0px 150px;
     gap: 63vh;
+    row-gap: 15px;
 }
 
 .sub-container
@@ -101,6 +102,7 @@ export default {
     flex-wrap: wrap;
     flex-direction: column;
     row-gap: 30px;
+    margin-bottom: 40px;
 }
 
 .sub-container h2
