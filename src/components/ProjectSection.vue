@@ -23,7 +23,7 @@
                         <section class="project-single-container"
                             v-for="project in projects.slice(indexSlice,indexSlice + 1)" :key="project.id">
                             <h1>{{project.title}}</h1>
-                            <img class="main-image" :src="project.img">
+                            <img class="project-image" :src="project.img">
                             <p>{{project.description}}</p>
                         </section>
                     </div>
@@ -126,8 +126,15 @@ export default {
                     }
                 }, 300);
             }      
-        }
+        },
+        handleScroll (event) {
+            this.projectLoaded = false;
+            this.projectClicked = false;
     }
+    },
+    created () {
+    window.addEventListener('scroll', this.handleScroll);
+  },
 }
 </script>
 
@@ -234,6 +241,12 @@ a
     text-align: center;
 }
 
+.project-image {
+    width: 1300px;
+    height: 600px;
+    border-radius: 50px;
+    object-fit: cover;
+}
 .close-enter-active,
 .close-leave-active
 {
