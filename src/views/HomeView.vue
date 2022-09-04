@@ -26,7 +26,7 @@
   </section>
   <section>
     <div ref="project-section" class="project-section">
-      <project-section />
+      <project-section/>
     </div>
   </section>
   <section>
@@ -50,8 +50,9 @@ import HeroSection from '@/components/HeroSection.vue';
 import KnowledgeSection from '@/components/KnowledgeSection.vue';
 import ProjectSection from '@/components/ProjectSection.vue';
 import ContactSection from '@/components/ContactSection.vue';
+import ProjectFile from '@/components/ProjectFile.vue';
 export default {
-  components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection },
+  components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection,ProjectFile},
 
   methods: {
     ScrollToAnchor(refName) {
