@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div @click="setElemetVisable(project.id)" class="project-card" v-for="project in projects" :key="project.id">
+        <div @click="SetElementVisible(project.id)" class="project-card" v-for="project in projects" :key="project.id">
             <h2>{{ project.title }}</h2>
             <img class="main-image" :src="project.img">
             <section class="aling-text-section">
@@ -15,11 +15,18 @@
             </div>
         </div>
 
+        <!-- single project elements -->
         <transition name="close">
             <div v-if="projectClicked" class="project-container">
                 <transition name="fade">
                     <div v-if="projectLoaded">
-                        <button ref="btn" @click="setElemetVisable" class="project-btn">X</button>
+                        <button ref="btn" @click="SetElementVisible" class="project-btn">X</button>
+                        <button v-if="!endOfProjectList" class="right-button" @click="NextProject()">
+                            <arrow />
+                        </button>
+                        <button v-if="!startOfProjectList" class="left-button" @click="PriveousProject()">
+                            <arrow />
+                        </button>
                         <section class="project-single-container"
                             v-for="project in projects.slice(indexSlice,indexSlice + 1)" :key="project.id">
                             <h1>{{project.title}}</h1>
@@ -30,24 +37,34 @@
                 </transition>
             </div>
         </transition>
+
     </div>
 
 </template>
 
 <script>
-
+import Arrow from './Arrow.vue';
 export default {
+    components: {Arrow},
     name: 'ProjectSection',
     data() {
         return {
-            interval: null,
+            //bools
             projectClicked: false,
             projectLoaded:false,
-            indexSlice:0,
+            endOfProjectList: false,
+            startOfProjectList: false,
+
+            //interval
+            interval: null,
+
+            //where to slice array
+            indexSlice: 0,
+
             projects: [
                 {
                     id: 0,
-                    title: 'Väder applikation',
+                    title: 'Väder applikation0',
                     description: 'En väder applikation som använder gps lokalisering för att visa väder information för staden du är i, Du kan även fylla i en stad du väljer själv och få tillbaka väder information för dagen och dom 7 kommande dagarna',
                     img: require('@/assets/Projectbilder/Home.png'),
                     githubLink: 'https://github.com/prodigystudios/weatherapp',
@@ -66,7 +83,7 @@ export default {
                 },
                 {
                     id: 1,
-                    title: 'Väder applikation',
+                    title: 'Väder applikation1',
                     img: require('@/assets/Projectbilder/Home.png'),
                     githubLink: 'https://github.com/prodigystudios/weatherapp',
                     liveLink: 'https://prodigystudios.github.io/weatherapp/#/',
@@ -84,7 +101,7 @@ export default {
                 },
                 {
                     id: 2,
-                    title: 'Väder applikation',
+                    title: 'Väder applikation2',
                     img: require('@/assets/Projectbilder/Home.png'),
                     githubLink: 'https://github.com/prodigystudios/weatherapp',
                     liveLink: 'https://prodigystudios.github.io/weatherapp/#/',
@@ -101,36 +118,91 @@ export default {
                     ]
                 },
             ]
-
         }
     },
     methods: {
-        setElemetVisable(id) {
-            if(!this.projectClicked) {
-                this.projectClicked = true;
-                this.indexSlice = id;
 
-                this.interval = setInterval(() => {
+        SetElementVisible(id) {
+            if(!this.projectClicked) 
+            {
+                this.indexSlice = id;
+                this.projectClicked = true;
+                this.TransitionLoad(800);
+                if(id == 0) 
+                {
+                    this.startOfProjectList = true;
+                }
+                if(id > 0 && id != this.lengthOfProject) 
+                {
+                    this.startOfProjectList = false;
+                }
+                if(id == this.lengthOfProject) {
+                    this.endOfProjectList = true;
+                }
+            }
+            else 
+            {
+                this.projectLoaded = false;
+                this.TransitionEnd(300);
+            }      
+        },
+        //transition with timer to handle animations loading
+        TransitionLoad(timer) {
+            
+            this.interval = setInterval(() => {
                     this.projectLoaded = true;
                     if(this.projectLoaded) {
                         clearInterval(this.interval);
                     }
-                }, 800);
-                
-            }else {
-                this.projectLoaded = false;
+                }, timer);
+        },
+
+        TransitionEnd(timer) {
+            
                 this.interval = setInterval(() => {
                     this.projectClicked = false;
                     if(!this.projectClicked) {
                         clearInterval(this.interval)
                     }
-                }, 300);
-            }      
+                }, timer);
         },
+        //buttons checks for next or last project
+        NextProject() {
+
+            if(this.indexSlice < this.lengthOfProject) {
+                this.projectLoaded = false;
+                this.TransitionLoad(500);
+                this.indexSlice ++;
+                this.startOfProjectList = false;
+                if(this.indexSlice == this.lengthOfProject) 
+                {
+                    this.endOfProjectList = true;
+                }
+            }
+        },
+        PriveousProject() {
+            if(this.indexSlice > 0) {
+                this.projectLoaded = false;
+                this.TransitionLoad(500);    
+                this.indexSlice --;
+                this.endOfProjectList = false;
+                if(this.indexSlice == 0) {
+                    this.startOfProjectList = true;
+                }
+            }
+        },
+        //Close window when scrolling away from project section 
         handleScroll (event) {
-            this.projectLoaded = false;
-            this.projectClicked = false;
-    }
+            if(this.projectLoaded && this.projectClicked) { 
+                this.projectLoaded = false;
+                this.TransitionEnd(100);
+            }
+        },
+    },
+    computed: {
+        lengthOfProject() {
+            return this.projects.length - 1;
+        }
     },
     created () {
     window.addEventListener('scroll', this.handleScroll);
@@ -209,18 +281,19 @@ a
 .project-container
 {
     position: absolute;
-    top: 160%;
+    top: 175%;
     left: 50px;
     width: 90%;
     height: 800px;
-    background: linear-gradient(180.06deg, #181872 52.13%, #05051F 99.95%);
+    background: #09092f;
+    box-shadow: 1px 1px 40px 20px black;
 }
 
 .project-btn
 {
-    float:right;
-    padding-right:30px;
-    padding-top:20px;
+    float: right;
+    padding-right: 30px;
+    padding-top: 20px;
     font-weight: 900;
     background: none;
     border: none;
@@ -233,7 +306,37 @@ a
     cursor: pointer;
 }
 
-.project-single-container {
+.right-button,
+.left-button
+{
+    position: absolute;
+    scale: 0.7;
+    top: 40%;
+    right: 0;
+    margin: 30px;
+    transform: rotate(90deg);
+    width: 100px;
+    height: 100px;
+    background: white;
+    border-radius: 200px;
+    transition: 0.2s ease;
+}
+
+.left-button
+{
+    transform: rotate(270deg);
+    left: 0;
+}
+
+.right-button:hover,
+.left-button:hover
+{
+    background-color: rgba(109, 107, 243, 0.767);
+    cursor: pointer;
+}
+
+.project-single-container
+{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -241,12 +344,14 @@ a
     text-align: center;
 }
 
-.project-image {
+.project-image
+{
     width: 1300px;
     height: 600px;
     border-radius: 50px;
     object-fit: cover;
 }
+
 .close-enter-active,
 .close-leave-active
 {
@@ -259,13 +364,15 @@ a
     width: 0%;
 }
 
-
 .fade-enter-active,
-.fade-leave-active{
+.fade-leave-active
+{
     transition: opacity 0.5s ease-in-out;
 }
+
 .fade-enter-from,
-.fade-leave-to {
+.fade-leave-to
+{
     opacity: 0;
 }
 </style>
