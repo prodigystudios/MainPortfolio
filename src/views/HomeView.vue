@@ -1,4 +1,5 @@
 <template>
+  <div ref="top"></div>
   <nav ref="navbar" class="navbar">
     <div class="nav-links">
       <h1>William ali</h1>
@@ -13,35 +14,33 @@
       </button>
     </div>
   </nav>
-<div class="wrapper">
-  <section>
-    <div ref="hero-section" class="hero-section">
-      <hero-section />
-    </div>
-  </section>
-  <section>
-    <div ref="knowledge-section" class="knowledge-section">
-      <knowledge-section />
-    </div>
-  </section>
-  <section>
-    <div ref="project-section" class="project-section">
-      <project-section/>
-    </div>
-  </section>
-  <section>
-    <div ref="contact-section" class="contact-section">
-      <Contact-section />
-      <div class="top-btn">
-    <button @click="ScrollToAnchor('hero-section')" class="btn">
-      <div class="right-arrow"></div>
-      <div class="left-arrow"></div>
-    </button>
+  <div class="wrapper">
+    <section>
+      <div ref="hero-section" class="hero-section">
+        <hero-section />
+      </div>
+    </section>
+    <section>
+      <div ref="knowledge-section" class="knowledge-section">
+        <knowledge-section />
+      </div>
+    </section>
+    <section>
+      <div ref="project-section" class="project-section">
+        <project-section />
+      </div>
+    </section>
+    <section>
+      <div ref="contact-section" class="contact-section">
+        <Contact-section />
+        <div class="top-btn">
+          <button @click="ScrollToAnchor('hero-section')" class="btn">
+            <arrow/>
+          </button>
+        </div>
+      </div>
+    </section>
   </div>
-    </div>
-  </section>
-  
-</div>
 
 </template>
 
@@ -51,9 +50,9 @@ import KnowledgeSection from '@/components/KnowledgeSection.vue';
 import ProjectSection from '@/components/ProjectSection.vue';
 import ContactSection from '@/components/ContactSection.vue';
 import ProjectFile from '@/components/ProjectFile.vue';
+import Arrow from '@/components/Arrow.vue';
 export default {
-  components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection,ProjectFile},
-
+  components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection,ProjectFile,Arrow},
   methods: {
     ScrollToAnchor(refName) {
       const el = this.$refs[refName];
@@ -64,7 +63,6 @@ export default {
 </script>
 
 <style scoped>
-
 nav
 {
   position: fixed;
@@ -107,10 +105,12 @@ button:hover
   cursor: pointer;
 }
 
-section {
+section
+{
   scroll-behavior: smooth;
-  scroll-snap-align:center;
+  scroll-snap-align: center;
 }
+
 .hero-section
 {
   scroll-margin-top: 110px;
@@ -120,41 +120,29 @@ section {
 {
   scroll-margin-top: 220px;
 }
-.contact-section {
+
+.contact-section
+{
   scroll-margin-top: 300px;
 }
 
-.top-btn{
+.top-btn
+{
   text-align: center;
   margin-bottom: 50px;
 }
 
-.btn {
-  width:100px;
+.btn
+{
+  width: 100px;
   height: 100px;
   background: white;
   border-radius: 200px;
   transition: 0.2s ease;
 }
-.btn:hover{
+.btn:hover
+{
   background-color: rgba(109, 107, 243, 0.767);
-}
-.left-arrow {
-  position: relative;
-  left:25px;
-  bottom:31px;
-  width: 10px;
-  height: 50px;
-  background-color: #101036;
-  transform:rotate(230deg);
-}
-.right-arrow {
-  position: relative;
-  left:55px;
-  top:20px;
-  width: 10px;
-  height: 50px;
-  background-color: #101036;
-  transform:rotate(135deg);
+  cursor: pointer;
 }
 </style>
