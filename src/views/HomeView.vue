@@ -35,7 +35,7 @@
         <Contact-section />
         <div class="top-btn">
           <button @click="ScrollToAnchor('hero-section')" class="btn">
-            <arrow/>
+            <arrow />
           </button>
         </div>
       </div>
@@ -49,10 +49,9 @@ import HeroSection from '@/components/HeroSection.vue';
 import KnowledgeSection from '@/components/KnowledgeSection.vue';
 import ProjectSection from '@/components/ProjectSection.vue';
 import ContactSection from '@/components/ContactSection.vue';
-import ProjectFile from '@/components/ProjectFile.vue';
 import Arrow from '@/components/Arrow.vue';
 export default {
-  components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection,ProjectFile,Arrow},
+  components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection,Arrow},
   methods: {
     ScrollToAnchor(refName) {
       const el = this.$refs[refName];
@@ -140,6 +139,7 @@ section
   border-radius: 200px;
   transition: 0.2s ease;
 }
+
 .btn:hover
 {
   background-color: rgba(109, 107, 243, 0.767);

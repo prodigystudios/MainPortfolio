@@ -84,16 +84,18 @@ export default {
 
 .container h1
 {
-    padding: 40px;
+    padding-top: 60px;
     text-align: center;
+    font-size: 35px;
 }
 
 .main-container
 {
     display: flex;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     margin: 0px 150px;
-    gap: 62vh;
+    gap: 50vh;
     row-gap: 15px;
 }
 
@@ -110,9 +112,10 @@ export default {
 {
     text-decoration: underline;
     font-size: 30px;
+    line-height: 100px;
 }
 .sub-container p {
-    font-size: 18px;
+    font-size: 20px;
     margin: 0;
 }
 
