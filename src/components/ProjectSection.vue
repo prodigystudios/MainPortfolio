@@ -4,8 +4,8 @@
             <h2>{{ project.title }}</h2>
             <img class="main-image" :src="project.img">
             <section class="aling-text-section">
-                <p>Github link: {{ project.githubLink }}</p>
-                <p>Live site link: {{ project.liveLink }}</p>
+                <a @click="linkedPressed()" :href="project.githubLink" target="blank" alt="link to github">Github link: klicka här</a>
+                <a @click="linkedPressed()" :href="project.liveLink" target="blank" alt="link to live site">Live site: klicka här</a>
             </section>
             <h5>Använda Tekniker</h5>
             <div class="sub-container">
@@ -28,10 +28,10 @@
                             <arrow />
                         </button>
                         <section class="project-single-container"
-                            v-for="project in projects.slice(indexSlice,indexSlice + 1)" :key="project.id">
-                            <h1>{{project.title}}</h1>
+                            v-for="project in projects.slice(indexSlice, indexSlice + 1)" :key="project.id">
+                            <h1>{{ project.title }}</h1>
                             <img class="project-image" :src="project.img">
-                            <p>{{project.description}}</p>
+                            <p>{{ project.description }}</p>
                         </section>
                     </div>
                 </transition>
@@ -45,16 +45,16 @@
 <script>
 import Arrow from './Arrow.vue';
 export default {
-    components: {Arrow},
+    components: { Arrow },
     name: 'ProjectSection',
     data() {
         return {
             //bools
             projectClicked: false,
-            projectLoaded:false,
-            endOfProjectList: false,
+            projectLoaded: false,
             startOfProjectList: false,
-
+            endOfProjectList: false,
+            isLinkedPressed: false,
             //interval
             interval: null,
 
@@ -121,79 +121,89 @@ export default {
         }
     },
     methods: {
+        linkedPressed() {
+            this.isLinkedPressed = true;
+            this.interval = setInterval(() => {
+                this.isLinkedPressed = false;
+                if (!this.isLinkedPressed) {
+                    clearInterval(this.interval);
+                }
+            }, 100)
+        },
 
         SetElementVisible(id) {
-            if(!this.projectClicked) 
-            {
-                this.indexSlice = id;
-                this.projectClicked = true;
-                this.TransitionLoad(800);
-                if(id == 0) 
-                {
-                    this.startOfProjectList = true;
+            console.log(this.interval)
+            if (!this.isLinkedPressed) {
+                if (!this.projectClicked) {
+                    this.indexSlice = id;
+                    this.projectClicked = true;
+                    this.TransitionLoad(800);
+                    if (id == 0) {
+                        this.startOfProjectList = true;
+                    }
+                    if (id > 0 && id != this.lengthOfProject) {
+                        this.startOfProjectList = false;
+                    }
+                    if (id == this.lengthOfProject) {
+                        this.endOfProjectList = true;
+                    }
                 }
-                if(id > 0 && id != this.lengthOfProject) 
-                {
-                    this.startOfProjectList = false;
-                }
-                if(id == this.lengthOfProject) {
-                    this.endOfProjectList = true;
+                else {
+                    this.projectLoaded = false;
+                    this.TransitionEnd(300);
                 }
             }
-            else 
-            {
-                this.projectLoaded = false;
-                this.TransitionEnd(300);
-            }      
+
         },
         //transition with timer to handle animations loading
         TransitionLoad(timer) {
-            
+
             this.interval = setInterval(() => {
-                    this.projectLoaded = true;
-                    if(this.projectLoaded) {
-                        clearInterval(this.interval);
-                    }
-                }, timer);
+                this.projectLoaded = true;
+                if (this.projectLoaded) {
+                    clearInterval(this.interval);
+                    console.log(this.interval)
+                }
+                console.log(this.interval)
+            }, timer);
         },
 
         TransitionEnd(timer) {
-            
-                this.interval = setInterval(() => {
-                    this.projectClicked = false;
-                    if(!this.projectClicked) {
-                        clearInterval(this.interval)
-                    }
-                }, timer);
+
+            this.interval = setInterval(() => {
+                this.projectClicked = false;
+                if (!this.projectClicked) {
+                    clearInterval(this.interval)
+                }
+            }, timer);
         },
         //buttons checks for next or last project
         NextProject() {
 
-            if(this.indexSlice < this.lengthOfProject) {
+            if (this.indexSlice < this.lengthOfProject) {
                 this.projectLoaded = false;
                 this.TransitionLoad(500);
-                this.indexSlice ++;
+                this.indexSlice++;
                 this.startOfProjectList = false;
-                if(this.indexSlice == this.lengthOfProject) 
-                {
+                if (this.indexSlice == this.lengthOfProject) {
                     this.endOfProjectList = true;
                 }
             }
         },
         PriveousProject() {
-            if(this.indexSlice > 0) {
+            if (this.indexSlice > 0) {
                 this.projectLoaded = false;
-                this.TransitionLoad(500);    
-                this.indexSlice --;
+                this.TransitionLoad(500);
+                this.indexSlice--;
                 this.endOfProjectList = false;
-                if(this.indexSlice == 0) {
+                if (this.indexSlice == 0) {
                     this.startOfProjectList = true;
                 }
             }
         },
         //Close window when scrolling away from project section 
-        handleScroll (event) {
-            if(this.projectLoaded && this.projectClicked) { 
+        handleScroll(event) {
+            if (this.projectLoaded && this.projectClicked) {
                 this.projectLoaded = false;
                 this.TransitionEnd(100);
             }
@@ -204,9 +214,9 @@ export default {
             return this.projects.length - 1;
         }
     },
-    created () {
-    window.addEventListener('scroll', this.handleScroll);
-  },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+    },
 }
 </script>
 
@@ -244,6 +254,7 @@ a
 .project-card:hover
 {
     outline: 1px solid lightcoral;
+    cursor: pointer;
 }
 
 .project-card h5
@@ -268,8 +279,17 @@ a
 
 .aling-text-section
 {
+    display:flex;
+    flex-direction: column;
+    row-gap: 20px;
     text-align: left;
     margin-left: 50px;
+    margin-top:10px;
+    width: fit-content;
+}
+.aling-text-section a:hover {
+    text-decoration: underline;
+    letter-spacing: 0.5px;
 }
 
 .icon-scale
@@ -341,8 +361,9 @@ a
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    text-align: center; 
+    text-align: center;
 }
+
 .project-image
 {
     width: 1300px;
@@ -354,8 +375,8 @@ a
 .close-enter-active,
 .close-leave-active
 {
-    transition: width 1s ease-in-out, 
-                opacity 1s ease;
+    transition: width 1s ease-in-out,
+        opacity 1s ease;
 }
 
 .close-enter-from,
