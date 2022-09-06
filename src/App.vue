@@ -5,6 +5,7 @@
 <style>
   @import url("https://fonts.googleapis.com/css?family=Outfit");
   @import url("https://fonts.googleapis.com/css?family=Kodchasan");
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
   html {
     overflow-y:scroll;

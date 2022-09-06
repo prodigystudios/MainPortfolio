@@ -2,10 +2,21 @@
   <div ref="top"></div>
   <nav ref="navbar" class="navbar">
     <div class="nav-links">
-      <h1>William ali</h1>
-      <button @click="ScrollToAnchor('hero-section')">
-        <h4>Om mig</h4>
-      </button>
+        <h1 @click="ScrollToAnchor('hero-section')">William ali</h1>
+      <!-- <button @click="ScrollToAnchor('hero-section')"> -->
+        <!-- <h4>Om mig</h4> -->
+        <div class="dropdown-menu">
+          <button @scroll="ScrollToAnchor('hero-section')" class="drop-btn"><h4>Om mig</h4>
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <button @click="ScrollToAnchor('knowledge-section')">
+            <h4>Kunskaper</h4>
+          </button>
+        </div>
+        </div>
+        
+      <!-- </button> -->
       <button @click="ScrollToAnchor('project-section')">
         <h4>Projekt</h4>
       </button>
@@ -74,8 +85,13 @@ nav
 nav h1
 {
   position: absolute;
+  align-content: center;
+  align-self: center;
   left: 0;
   margin: 0px 50px;
+}
+nav h1:hover {
+  cursor: pointer;
 }
 
 .nav-links
@@ -88,7 +104,24 @@ nav h1
   gap: 200px;
 }
 
-
+.dropdown-menu {
+  overflow: hidden;
+}
+.drop-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap:10px;
+}
+.dropdown-content {
+  display:none;
+  position: absolute;
+  top:60px;
+  margin-left:25px;
+}
+.dropdown-menu:hover .dropdown-content {
+  display:block;
+}
 button
 {
   font-family: Outfit;

@@ -281,9 +281,9 @@ a
 .project-container
 {
     position: absolute;
+    text-align: center;
     top: 175%;
-    left: 50px;
-    width: 90%;
+    width: 100%;
     height: 800px;
     background: #09092f;
     box-shadow: 1px 1px 40px 20px black;
@@ -339,11 +339,10 @@ a
 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    text-align: center;
+    text-align: center; 
 }
-
 .project-image
 {
     width: 1300px;
@@ -355,13 +354,15 @@ a
 .close-enter-active,
 .close-leave-active
 {
-    transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out, 
+                opacity 1s ease;
 }
 
 .close-enter-from,
 .close-leave-to
 {
     width: 0%;
+    opacity: 0;
 }
 
 .fade-enter-active,
