@@ -1,30 +1,21 @@
 <template>
-  <div ref="top"></div>
   <nav ref="navbar" class="navbar">
     <div class="nav-links">
-        <h1 @click="ScrollToAnchor('hero-section')">William ali</h1>
-      <!-- <button @click="ScrollToAnchor('hero-section')"> -->
-        <!-- <h4>Om mig</h4> -->
-        <div class="dropdown-menu">
-          <button @scroll="ScrollToAnchor('hero-section')" class="drop-btn"><h4>Om mig</h4>
+      <div class="dropdown-menu">
+        <button class="btn-nav" @click="ScrollToAnchor('hero-section')">Om mig
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <button @click="ScrollToAnchor('knowledge-section')">
-            <h4>Kunskaper</h4>
+          <button class="btn-nav" @click="ScrollToAnchor('knowledge-section')">Kunskaper
           </button>
         </div>
-        </div>
-        
-      <!-- </button> -->
-      <button @click="ScrollToAnchor('project-section')">
-        <h4>Projekt</h4>
-      </button>
-      <button @click="ScrollToAnchor('contact-section')">
-        <h4>Kontakt</h4>
-      </button>
+      </div>
+      <button class="main-name" @click="ScrollToAnchor('hero-section')">William ali</button>
+      <button @click="ScrollToAnchor('project-section')">Projekt</button>
+      <button @click="ScrollToAnchor('contact-section')">Kontakt</button>
     </div>
   </nav>
+
   <div class="wrapper">
     <section>
       <div ref="hero-section" class="hero-section">
@@ -62,10 +53,11 @@ import ProjectSection from '@/components/ProjectSection.vue';
 import ContactSection from '@/components/ContactSection.vue';
 import Arrow from '@/components/Arrow.vue';
 export default {
-  components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection,Arrow},
+  components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection, Arrow },
   methods: {
     ScrollToAnchor(refName) {
       const el = this.$refs[refName];
+      console.log('this is clicked');
       el.scrollIntoView({ behavior: 'smooth' })
     },
   }
@@ -73,6 +65,17 @@ export default {
 </script>
 
 <style scoped>
+  .main-name
+{
+  position: absolute;
+  align-content: center;
+  align-self: center;
+  left: 0;
+  margin: 0px 50px;
+  font-weight: bold;
+  font-size: 25px;
+}
+
 nav
 {
   position: fixed;
@@ -80,18 +83,6 @@ nav
   width: 100%;
   background: #101036;
   height: 112px;
-}
-
-nav h1
-{
-  position: absolute;
-  align-content: center;
-  align-self: center;
-  left: 0;
-  margin: 0px 50px;
-}
-nav h1:hover {
-  cursor: pointer;
 }
 
 .nav-links
@@ -104,27 +95,23 @@ nav h1:hover {
   gap: 200px;
 }
 
-.dropdown-menu {
-  overflow: hidden;
-}
-.drop-btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap:10px;
-}
-.dropdown-content {
-  display:none;
+.dropdown-content
+{
+  display: none;
   position: absolute;
-  top:60px;
-  margin-left:25px;
+  top: 60px;
+  margin-left: 25px;
+  padding-top:20px;
 }
-.dropdown-menu:hover .dropdown-content {
-  display:block;
+.dropdown-menu:hover .dropdown-content
+{
+  display: block;
 }
+
 button
 {
   font-family: Outfit;
+  font-weight: bold;
   background: none;
   border: none;
   font-size: 18px;
@@ -135,6 +122,8 @@ button
 button:hover
 {
   cursor: pointer;
+  filter: drop-shadow(0px 0px 10px #4444d1) 
+  brightness(200%);
 }
 
 section
@@ -162,20 +151,5 @@ section
 {
   text-align: center;
   margin-bottom: 50px;
-}
-
-.btn
-{
-  width: 100px;
-  height: 100px;
-  background: white;
-  border-radius: 200px;
-  transition: 0.2s ease;
-}
-
-.btn:hover
-{
-  background-color: rgba(109, 107, 243, 0.767);
-  cursor: pointer;
 }
 </style>

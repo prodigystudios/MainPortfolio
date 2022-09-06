@@ -14,7 +14,6 @@
         <transition name="rightSlide">
             <img v-if="showImg" class="img" src="../assets/Portrait/Självporträttlol.jpg">
         </transition>
-        
     </div>
 </template>
 <script>
