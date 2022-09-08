@@ -4,8 +4,10 @@
             <h2>{{ project.title }}</h2>
             <img class="main-image" :src="project.img">
             <section class="aling-text-section">
-                <a @click="linkedPressed()" :href="project.githubLink" target="blank" alt="link to github">Github link: klicka här</a>
-                <a @click="linkedPressed()" :href="project.liveLink" target="blank" alt="link to live site">Live site: klicka här</a>
+                <a @click="linkedPressed()" :href="project.githubLink" target="blank" alt="link to github">Github link:
+                    klicka här</a>
+                <a @click="linkedPressed()" :href="project.liveLink" target="blank" alt="link to live site">Live site:
+                    klicka här</a>
             </section>
             <h5>Använda Tekniker</h5>
             <div class="sub-container">
@@ -132,7 +134,8 @@ export default {
         },
 
         SetElementVisible(id) {
-            console.log(this.interval)
+            const htmlEl = document.getElementsByClassName('html');
+            htmlEl.style.overflow = 'hidden';
             if (!this.isLinkedPressed) {
                 if (!this.projectClicked) {
                     this.indexSlice = id;
@@ -202,12 +205,12 @@ export default {
             }
         },
         //Close window when scrolling away from project section 
-        handleScroll(event) {
-            if (this.projectLoaded && this.projectClicked) {
-                this.projectLoaded = false;
-                this.TransitionEnd(100);
-            }
-        },
+        // handleScroll(event) {
+        //     if (this.projectLoaded && this.projectClicked) {
+        //         this.projectLoaded = false;
+        //         this.TransitionEnd(100);
+        //     }
+        // },
     },
     computed: {
         lengthOfProject() {
@@ -279,15 +282,17 @@ a
 
 .aling-text-section
 {
-    display:flex;
+    display: flex;
     flex-direction: column;
     row-gap: 20px;
     text-align: left;
     margin-left: 50px;
-    margin-top:10px;
+    margin-top: 10px;
     width: fit-content;
 }
-.aling-text-section a:hover {
+
+.aling-text-section a:hover
+{
     text-decoration: underline;
     letter-spacing: 0.5px;
 }
@@ -396,5 +401,39 @@ a
 .fade-leave-to
 {
     opacity: 0;
+}
+
+
+@media screen and (max-width: 425px)
+{
+    .project-container
+    {
+        position: fixed;
+        top:0;
+        width: 100%;
+        height: 100%;
+        background: #09092f;
+        box-shadow: 1px 1px 40px 20px black;
+        overflow-y:scroll;
+    }
+
+    .project-image
+    {
+        width: 420px;
+        height: 600px;
+        border-radius: 50px;
+        object-fit: cover;
+    }
+
+    .project-single-container
+{
+    display: flex;
+    overflow: scroll;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 }
 </style>
