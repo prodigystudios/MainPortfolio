@@ -36,7 +36,7 @@
       <div ref="contact-section" class="contact-section">
         <Contact-section />
         <div class="top-btn">
-          <button @click="ScrollToAnchor('hero-section')" class="btn">
+          <button @click="ScrollToAnchor('hero-section')" class="end-btn">
             <arrow />
           </button>
         </div>
@@ -151,5 +151,10 @@ section
 {
   text-align: center;
   margin-bottom: 50px;
+}
+.end-btn {
+  background: white;
+  width:100px;
+  border-radius: 60px;
 }
 </style>
