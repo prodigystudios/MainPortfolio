@@ -17,6 +17,7 @@
       </div>
     </nav>
   </transition>
+  
   <nav class="navbar-mobile">
     <div class="nav-links">
       <button class="main-name" @click="ScrollToAnchor('hero-section')">William ali</button>
@@ -58,7 +59,7 @@
     <section>
       <div ref="contact-section" class="contact-section">
         <Contact-section />
-        <div class="top-btn">
+        <div v-if="!mobileView" class="top-btn">
           <button @click="ScrollToAnchor('hero-section')" class="end-btn">
             <arrow />
           </button>
@@ -66,7 +67,6 @@
       </div>
     </section>
   </div>
-
 </template>
 
 <script>

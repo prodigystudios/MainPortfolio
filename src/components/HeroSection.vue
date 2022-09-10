@@ -110,6 +110,7 @@ export default {
     {
         font-size: 28px;
         width: 100%;
+        text-align: center;
     }
 
     .hero-container p
@@ -118,6 +119,7 @@ export default {
         font-size: 15px;
         font-weight: 300;
         line-height: 30px;
+        text-align: center;
     }
 
     .img

@@ -1,12 +1,12 @@
 <template>
     <transition name="fade">
-        <div v-if="emailSent" class="email-notice">
-        <h1>Tack för ditt mail!</h1>
-        <h3>Jag återkommer så fort jag kan!</h3>
-        <button @click="emailSent = false" class="notice-btn">Stäng!</button>
-    </div>
+        <div v-if="emailSent && !mobileView">" class="email-notice">
+            <h1>Tack för ditt mail!</h1>
+            <h3>Jag återkommer så fort jag kan!</h3>
+            <button @click="emailSent = false" class="notice-btn">Stäng!</button>
+        </div>
     </transition>
- 
+
     <form @submit.prevent="sendEmail" class="container">
         <div class="contactmetext">
             <h1>Kontakta mig!</h1>
@@ -27,7 +27,7 @@
                 title="Meddelandet får inte vara längre än 250 bokstäver" pattern="[a-Z 1-9]{1,250}" v-model="message"
                 name="message"></textarea>
         </div>
-        <div class="send">
+        <div class="send" ref="submitDiv">
             <input ref="submitBtn" type="submit" value="Skicka">
         </div>
     </form>
@@ -43,11 +43,14 @@ export default {
             lname: '',
             email: '',
             message: '',
-            emailSent: false
+            emailSent: false,
+            mobileView: false,
         }
     },
     methods: {
         sendEmail(e) {
+            const submit = this.$refs.submitBtn;
+            const submitDiv = this.$refs.submitDiv;
             try {
                 emailjs.sendForm('service_en6yx2f', 'template_tzn6b4j', e.target,
                     'Uf01cgMiidXGxsqS4', {
@@ -57,9 +60,13 @@ export default {
                     message: this.message
                 })
                 this.emailSent = true;
+                submitDiv.style.backgroundColor = 'green';
+                submit.value = 'Skickat!';
             } catch (error) {
                 console.log({ error })
                 this.emailSent = false;
+                submitDiv.style.backgroundColor = 'Red';
+                submit.value = 'Nånting gick fel. Försök igen!';
             }
             // Reset form field
             this.fname = ''
@@ -67,7 +74,15 @@ export default {
             this.email = ''
             this.message = ''
         },
+    },
+    created() {
+        if (screen.width <= 425) {
+            this.mobileView = true;
+        } else {
+            this.mobileView = false;
+        }
     }
+
 }
 </script>
 
@@ -134,14 +149,14 @@ textarea
 
 input[type=submit]
 {
-    background-color:rgba(173, 216, 230, 0.247);
+    background-color: rgba(173, 216, 230, 0.247);
     color: white;
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-    margin-top: 20px;
+    height: 50px;
     transition: 0.5s ease;
 }
 
@@ -186,7 +201,7 @@ textarea::placeholder
 {
     height: 10%;
     width: 15%;
-    background-color:rgba(173, 216, 230, 0.575);
+    background-color: rgba(173, 216, 230, 0.575);
     border: none;
     border-radius: 15px;
 }
@@ -198,13 +213,15 @@ textarea::placeholder
 }
 
 .fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+.fade-leave-active
+{
+    transition: opacity 0.5s ease;
 }
 
 .fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.fade-leave-to
+{
+    opacity: 0;
 }
 
 .contactmetext
@@ -235,10 +252,21 @@ textarea::placeholder
 .send
 {
     grid-area: send;
+    height: fit-content;
+    margin-top: 20px;
 }
 
 h1
 {
     font-weight: normal;
+}
+
+@media screen and (max-width:425px)
+{
+    .container
+    {
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
 }
 </style>

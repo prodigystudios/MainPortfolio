@@ -26,14 +26,29 @@
                         <button v-if="!endOfProjectList && !mobileView" class="right-button" @click="NextProject()">
                             <arrow />
                         </button>
-                        <button v-if="!startOfProjectList && !mobileView" class="left-button" @click="PriveousProject()">
+                        <button v-if="!startOfProjectList && !mobileView" class="left-button"
+                            @click="PriveousProject()">
                             <arrow />
                         </button>
                         <section class="project-single-container"
                             v-for="project in projects.slice(indexSlice, indexSlice + 1)" :key="project.id">
                             <h1>{{ project.title }}</h1>
-                            <img class="project-image" :src="project.img">
+                            <div class="image-container">
+                                <img class="project-image" :src="project.img">
+                            </div>
+                            <h4>Beskrivning</h4>
                             <p>{{ project.description }}</p>
+                            <h4>Svårigheter</h4>
+                            <p>Svårt</p>
+                            <h4>Länkar</h4>
+                            <div class="links-container">
+                                <a :href="project.githubLink" target="blank"
+                                    alt="link to github">Github link:
+                                    klicka här</a>
+                                <a :href="project.liveLink" target="blank"
+                                    alt="link to live site">Live site:
+                                    klicka här</a>
+                            </div>
                         </section>
                     </div>
                 </transition>
@@ -220,8 +235,10 @@ export default {
     },
     created() {
         window.addEventListener('scroll', this.handleScroll);
-        if(screen.width <= 425) {
+        if (screen.width <= 425) {
             this.mobileView = true;
+        }else {
+            this.mobileView = false;
         }
     },
 }
@@ -410,6 +427,12 @@ a
 
 @media screen and (max-width: 425px)
 {
+    .container
+    {
+        margin-bottom: 5px;
+        margin-top: 50px;
+    }
+
     .project-container
     {
         position: fixed;
@@ -421,13 +444,6 @@ a
         overflow-y: scroll;
     }
 
-    .project-image
-    {
-        width: 420px;
-        height: 600px;
-        border-radius: 50px;
-        object-fit: cover;
-    }
 
     .project-single-container
     {
@@ -438,6 +454,42 @@ a
         justify-content: center;
         align-items: center;
         text-align: center;
+    }
+
+    .project-single-container h4
+    {
+        letter-spacing: 3px;
+    }
+
+    .project-single-container p
+    {
+        width: 80%;
+    }
+
+    .image-container
+    {
+        margin: 0px 10px;
+    }
+
+    .project-image
+    {
+        width: 100%;
+        height: 600px;
+        border-radius: 50px;
+    }
+
+    .aling-text-section
+    {
+        text-align: center;
+        margin: 0;
+        margin-top: 10px;
+        width: 100%;
+        font-size: 18px;
+    }
+    .links-container {
+        display: flex;
+        gap:20px;
+        margin-bottom: 20px;
     }
 }
 </style>

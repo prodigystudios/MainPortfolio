@@ -73,7 +73,6 @@ export default {
 </script>
 
 <style scoped>
-
 .container
 {
     width: 100%;
@@ -114,7 +113,9 @@ export default {
     font-size: 30px;
     line-height: 100px;
 }
-.sub-container p {
+
+.sub-container p
+{
     font-size: 20px;
     margin: 0;
 }
@@ -122,7 +123,18 @@ export default {
 .aling-items
 {
     display: flex;
-    gap:5px;
+    gap: 5px;
     align-items: center;
 }
+
+@media screen and (max-width: 425px)
+{
+    .container
+    {
+
+        margin-bottom: 5px;
+    }
+}
 </style>
+
+
