@@ -30,25 +30,40 @@
                             @click="PriveousProject()">
                             <arrow />
                         </button>
+
+
                         <section class="project-single-container"
                             v-for="project in projects.slice(indexSlice, indexSlice + 1)" :key="project.id">
-                            <h1>{{ project.title }}</h1>
-                            <div class="image-container">
-                                <img class="project-image" :src="project.img">
+                            <div class="heading-img-container">
+                                <div class="image-container">
+                                    <img class="project-image" :src="project.img">
+                                </div>
                             </div>
-                            <h4>Beskrivning</h4>
-                            <p>{{ project.description }}</p>
-                            <h4>Svårigheter</h4>
-                            <p>Svårt</p>
-                            <h4>Länkar</h4>
-                            <div class="links-container">
-                                <a :href="project.githubLink" target="blank"
-                                    alt="link to github">Github link:
-                                    klicka här</a>
-                                <a :href="project.liveLink" target="blank"
-                                    alt="link to live site">Live site:
-                                    klicka här</a>
+                            <div class="aling-items">
+                                <h1>{{ project.title }}</h1>
+                                <div class="description-container">
+                                    <h4>Beskrivning</h4>
+                                    <p>{{ project.description }}</p>
+                                </div>
+
+                                <div class="dif-container">
+                                    <h4>Svårigheter</h4>
+                                    <p>Svårt</p>
+                                </div>
+
+                                <div class="project-links">
+                                    <h4>Länkar</h4>
+                                    <div class="links-container">
+                                        <a :href="project.githubLink" target="blank" alt="link to github">Github link:
+                                            klicka här</a>
+                                        <a :href="project.liveLink" target="blank" alt="link to live site">Live site:
+                                            klicka här</a>
+                                    </div>
+                                </div>
                             </div>
+
+
+
                         </section>
                     </div>
                 </transition>
@@ -237,7 +252,7 @@ export default {
         window.addEventListener('scroll', this.handleScroll);
         if (screen.width <= 425) {
             this.mobileView = true;
-        }else {
+        } else {
             this.mobileView = false;
         }
     },
@@ -357,7 +372,7 @@ a
 {
     position: absolute;
     scale: 0.7;
-    top: 40%;
+    bottom:0;
     right: 0;
     margin: 30px;
     transform: rotate(90deg);
@@ -384,18 +399,46 @@ a
 .project-single-container
 {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     text-align: center;
 }
 
 .project-image
 {
     width: 1300px;
-    height: 600px;
+    height: 500px;
     border-radius: 50px;
     object-fit: cover;
+}
+
+.aling-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.heading-img-container {
+    margin:100px 0px;
+}
+.description-container
+{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.dif-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.links-container {
+    display: flex;
+    gap:10px;
+}
+.links-container a:hover {
+    text-decoration: underline;
 }
 
 .close-enter-active,
@@ -486,9 +529,11 @@ a
         width: 100%;
         font-size: 18px;
     }
-    .links-container {
+
+    .links-container
+    {
         display: flex;
-        gap:20px;
+        gap: 20px;
         margin-bottom: 20px;
     }
 }
