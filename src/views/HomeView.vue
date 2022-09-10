@@ -1,16 +1,39 @@
 <template>
-  <nav ref="navbar" class="navbar">
-    <div class="nav-links">
-      <div class="dropdown-menu">
-        <button class="btn-nav" @click="ScrollToAnchor('hero-section')">Om mig
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <button class="btn-nav" @click="ScrollToAnchor('knowledge-section')">Kunskaper
+  <transition name="dropdown">
+    <nav ref="navbar" class="navbar-desktop">
+      <div class="nav-links">
+        <div class="dropdown-menu">
+          <button class="btn-nav" @click="ScrollToAnchor('hero-section')">Om mig
+            <i class="fa fa-caret-down"></i>
           </button>
+          <div class="dropdown-content">
+            <button class="btn-nav" @click="ScrollToAnchor('knowledge-section')">Kunskaper
+            </button>
+          </div>
         </div>
+        <button class="main-name" @click="ScrollToAnchor('hero-section')">William ali</button>
+        <button @click="ScrollToAnchor('project-section')">Projekt</button>
+        <button @click="ScrollToAnchor('contact-section')">Kontakt</button>
       </div>
+    </nav>
+  </transition>
+  <nav class="navbar-mobile">
+    <div class="nav-links">
       <button class="main-name" @click="ScrollToAnchor('hero-section')">William ali</button>
+      <button v-if="!mobileMenu" class="menu-btn" @click="mobileMenu = true">
+        <div class="hamburger-container">
+          <div class="hamburger"></div>
+          <div class="hamburger"></div>
+          <div class="hamburger"></div>
+        </div>
+      </button>
+      <button v-else @click="mobileMenu = false">
+        <h1>X</h1>
+      </button>
+    </div>
+    <div v-if="mobileMenu" class="menu-container">
+      <button @click="ScrollToAnchor('hero-section')">Om mig</button>
+      <button @click="ScrollToAnchor('knowledge-section')">Kunskaper</button>
       <button @click="ScrollToAnchor('project-section')">Projekt</button>
       <button @click="ScrollToAnchor('contact-section')">Kontakt</button>
     </div>
@@ -54,10 +77,24 @@ import ContactSection from '@/components/ContactSection.vue';
 import Arrow from '@/components/Arrow.vue';
 export default {
   components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection, Arrow },
+  data() {
+    return {
+      mobileView: false,
+      mobileMenu: false,
+    }
+  },
+  created() {
+    if (screen.width <= 425) {
+      this.mobileView = true;
+    }
+    else {
+      this.mobileView = false;
+    }
+  },
   methods: {
     ScrollToAnchor(refName) {
       const el = this.$refs[refName];
-      console.log('this is clicked');
+      this.mobileMenu = false;
       el.scrollIntoView({ behavior: 'smooth' })
     },
   }
@@ -65,7 +102,7 @@ export default {
 </script>
 
 <style scoped>
-  .main-name
+.main-name
 {
   position: absolute;
   align-content: center;
@@ -101,8 +138,9 @@ nav
   position: absolute;
   top: 60px;
   margin-left: 25px;
-  padding-top:20px;
+  padding-top: 20px;
 }
+
 .dropdown-menu:hover .dropdown-content
 {
   display: block;
@@ -122,8 +160,7 @@ button
 button:hover
 {
   cursor: pointer;
-  filter: drop-shadow(0px 0px 10px #4444d1) 
-  brightness(200%);
+  filter: drop-shadow(0px 0px 10px #4444d1) brightness(200%);
 }
 
 section
@@ -152,9 +189,71 @@ section
   text-align: center;
   margin-bottom: 50px;
 }
-.end-btn {
+
+.end-btn
+{
   background: white;
-  width:100px;
+  width: 100px;
   border-radius: 60px;
+}
+
+@media screen and (min-width: 426px)
+{
+  .navbar-desktop
+  {
+    display: block;
+  }
+
+  .navbar-mobile
+  {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 425px)
+{
+
+  .navbar-desktop
+  {
+    display: none;
+  }
+
+  .nav-links
+  {
+    display: flex;
+    height: inherit;
+    align-items: center;
+    margin-right: 30px;
+  }
+
+  .main-name
+  {
+    margin: 0px 10px;
+  }
+
+  .menu-container
+  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    background: #0a0a32;
+    height: 400px;
+  }
+
+  .hamburger-container
+  {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .hamburger
+  {
+    width: 30px;
+    height: 5px;
+    border-radius: 60px;
+    background: white;
+  }
 }
 </style>

@@ -23,10 +23,10 @@
                 <transition name="fade">
                     <div v-if="projectLoaded">
                         <button ref="btn" @click="SetElementVisible" class="project-btn">X</button>
-                        <button v-if="!endOfProjectList" class="right-button" @click="NextProject()">
+                        <button v-if="!endOfProjectList && !mobileView" class="right-button" @click="NextProject()">
                             <arrow />
                         </button>
-                        <button v-if="!startOfProjectList" class="left-button" @click="PriveousProject()">
+                        <button v-if="!startOfProjectList && !mobileView" class="left-button" @click="PriveousProject()">
                             <arrow />
                         </button>
                         <section class="project-single-container"
@@ -57,6 +57,7 @@ export default {
             startOfProjectList: false,
             endOfProjectList: false,
             isLinkedPressed: false,
+            mobileView: false,
             //interval
             interval: null,
 
@@ -122,6 +123,7 @@ export default {
             ]
         }
     },
+
     methods: {
         linkedPressed() {
             this.isLinkedPressed = true;
@@ -132,10 +134,7 @@ export default {
                 }
             }, 100)
         },
-
         SetElementVisible(id) {
-            const htmlEl = document.getElementsByClassName('html');
-            htmlEl.style.overflow = 'hidden';
             if (!this.isLinkedPressed) {
                 if (!this.projectClicked) {
                     this.indexSlice = id;
@@ -156,8 +155,8 @@ export default {
                     this.TransitionEnd(300);
                 }
             }
-
         },
+
         //transition with timer to handle animations loading
         TransitionLoad(timer) {
 
@@ -205,12 +204,14 @@ export default {
             }
         },
         //Close window when scrolling away from project section 
-        // handleScroll(event) {
-        //     if (this.projectLoaded && this.projectClicked) {
-        //         this.projectLoaded = false;
-        //         this.TransitionEnd(100);
-        //     }
-        // },
+        handleScroll(event) {
+            if (!this.mobileView) {
+                if (this.projectLoaded && this.projectClicked) {
+                    this.projectLoaded = false;
+                    this.TransitionEnd(100);
+                }
+            }
+        },
     },
     computed: {
         lengthOfProject() {
@@ -219,6 +220,9 @@ export default {
     },
     created() {
         window.addEventListener('scroll', this.handleScroll);
+        if(screen.width <= 425) {
+            this.mobileView = true;
+        }
     },
 }
 </script>
@@ -409,12 +413,12 @@ a
     .project-container
     {
         position: fixed;
-        top:0;
+        top: 0;
         width: 100%;
         height: 100%;
         background: #09092f;
         box-shadow: 1px 1px 40px 20px black;
-        overflow-y:scroll;
+        overflow-y: scroll;
     }
 
     .project-image
@@ -426,14 +430,14 @@ a
     }
 
     .project-single-container
-{
-    display: flex;
-    overflow: scroll;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
+    {
+        display: flex;
+        overflow: scroll;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 }
 </style>
