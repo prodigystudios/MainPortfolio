@@ -15,23 +15,76 @@
             <img v-if="showImg" class="img" src="../assets/Portrait/Självporträttlol.jpg">
         </transition>
     </div>
+    <transition name="fadeOut">
+        <div v-if="showIntro && !mobileView" class="intro-container">
+            <div  class="typing">
+                <div class="typing-effect">
+                    Hej mitt namn är William Ali. Välkommna till min portfolio!
+                </div>
+            </div>
+        </div>
+
+    </transition>
 </template>
 <script>
 export default {
     name: 'heroSection',
-    mounted() {
-        this.showImg = true;
-        this.showHeader = true;
+
+    created() {
+        this.mobileView = screen.width <= 425 ? true: false;
+        this.AnimationDuration();
     },
     data() {
         return {
+            showIntro: true,
             showImg: false,
             showHeader: false,
+            mobileView: false,
+        }
+    },
+    methods: {
+        AnimationDuration() {
+            if(!this.mobileView)
+            setTimeout(() => {
+                this.showIntro = false;
+                this.showImg = true;
+                this.showHeader = true;
+            }, 3000);
+            else {
+                this.showImg = true;
+                this.showHeader = true;
+                this.showIntro = false;
+            }
         }
     }
 }
 </script>
 <style scoped>
+.intro-container {
+    margin-bottom: 2000px;
+}
+.typing
+{
+    position: absolute;
+    top: 400px;
+    display: flex;
+    width: 100%;
+    height: 7vh;
+    justify-content: center;
+}
+
+.typing-effect
+{
+    width: 41ch;
+    animation: typing 2.5s steps(41), effect .5s;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: Kodchasan;
+    font-weight: 900;
+    font-size: 3em;
+}
+
 .hero-container
 {
     display: flex;
@@ -65,6 +118,23 @@ export default {
 }
 
 
+/* animation*/
+@keyframes typing
+{
+    from
+    {
+        width: 0;
+    }
+}
+
+@keyframes effect
+{
+    50%
+    {
+        border-color: transparent;
+    }
+}
+
 .rightSlide-enter-active,
 .rightSlide-leave-active
 {
@@ -91,6 +161,17 @@ export default {
     opacity: 0;
 }
 
+.fadeOut-enter-active,
+.fadeOut-leave-active
+{
+    transition: all 1s ease;
+}
+
+.fadeOut-enter-from,
+.fadeOut-leave-to
+{
+    opacity: 0;
+}
 
 @media screen and (max-width: 425px)
 {
@@ -101,7 +182,7 @@ export default {
         align-items: center;
         flex-direction: column-reverse;
         margin-left: 0;
-        margin-top:80px;
+        margin-top: 80px;
         margin-bottom: 50px;
         gap: 50px;
     }
