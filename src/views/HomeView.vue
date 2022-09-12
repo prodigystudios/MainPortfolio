@@ -1,23 +1,22 @@
 <template>
-  <transition name="dropdown">
-    <nav ref="navbar" class="navbar-desktop">
-      <div class="nav-links">
-        <div class="dropdown-menu">
-          <button class="btn-nav" @click="ScrollToAnchor('hero-section')">Om mig
-            <i class="fa fa-caret-down"></i>
+
+  <nav ref="navbar" class="navbar-desktop">
+    <div class="nav-links">
+      <div class="dropdown-menu">
+        <button class="btn-nav" @click="ScrollToAnchor('hero-section')">Om mig
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <button class="btn-nav" @click="ScrollToAnchor('knowledge-section')">Kunskaper
           </button>
-          <div class="dropdown-content">
-            <button class="btn-nav" @click="ScrollToAnchor('knowledge-section')">Kunskaper
-            </button>
-          </div>
         </div>
-        <button class="main-name" @click="ScrollToAnchor('hero-section')">William ali</button>
-        <button @click="ScrollToAnchor('project-section')">Projekt</button>
-        <button @click="ScrollToAnchor('contact-section')">Kontakt</button>
       </div>
-    </nav>
-  </transition>
-  
+      <button class="main-name" @click="ScrollToAnchor('hero-section')">William ali</button>
+      <button @click="ScrollToAnchor('project-section')">Projekt</button>
+      <button @click="ScrollToAnchor('contact-section')">Kontakt</button>
+    </div>
+  </nav>
+
   <nav class="navbar-mobile">
     <div class="nav-links">
       <button class="main-name" @click="ScrollToAnchor('hero-section')">William ali</button>
@@ -43,7 +42,7 @@
   <div class="wrapper">
     <section>
       <div ref="hero-section" class="hero-section">
-        <hero-section />
+        <hero-section :isMobileView="mobileView" />
       </div>
     </section>
     <section>
@@ -53,12 +52,12 @@
     </section>
     <section>
       <div ref="project-section" class="project-section">
-        <project-section />
+        <project-section :isMobileView="mobileView" />
       </div>
     </section>
     <section>
       <div ref="contact-section" class="contact-section">
-        <Contact-section />
+        <Contact-section :isMobileView="mobileView" />
         <div v-if="!mobileView" class="top-btn">
           <button @click="ScrollToAnchor('hero-section')" class="end-btn">
             <arrow />
@@ -83,13 +82,11 @@ export default {
       mobileMenu: false,
     }
   },
+  mounted() {
+    this.ScrollToAnchor('hero-section');
+  },
   created() {
-    if (screen.width <= 425) {
-      this.mobileView = true;
-    }
-    else {
-      this.mobileView = false;
-    }
+    this.mobileView = screen.width <= 425 ? true : false;
   },
   methods: {
     ScrollToAnchor(refName) {

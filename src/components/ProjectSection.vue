@@ -23,10 +23,10 @@
                 <transition name="fade">
                     <div v-if="projectLoaded">
                         <button ref="btn" @click="SetElementVisible" class="project-btn">X</button>
-                        <button v-if="!endOfProjectList && !mobileView" class="right-button" @click="NextProject()">
+                        <button v-if="!endOfProjectList && !isMobileView" class="right-button" @click="NextProject()">
                             <arrow />
                         </button>
-                        <button v-if="!startOfProjectList && !mobileView" class="left-button"
+                        <button v-if="!startOfProjectList && !isMobileView" class="left-button"
                             @click="PriveousProject()">
                             <arrow />
                         </button>
@@ -36,11 +36,11 @@
                             v-for="project in projects.slice(indexSlice, indexSlice + 1)" :key="project.id">
                             <div class="heading-img-container">
                                 <div class="image-container">
+                                    <h1>{{ project.title }}</h1>
                                     <img class="project-image" :src="project.img">
                                 </div>
                             </div>
                             <div class="aling-items">
-                                <h1>{{ project.title }}</h1>
                                 <div class="description-container">
                                     <h4>Beskrivning</h4>
                                     <p>{{ project.description }}</p>
@@ -79,6 +79,8 @@ import Arrow from './Arrow.vue';
 export default {
     components: { Arrow },
     name: 'ProjectSection',
+    props: ['isMobileView'],
+
     data() {
         return {
             //bools
@@ -87,7 +89,6 @@ export default {
             startOfProjectList: false,
             endOfProjectList: false,
             isLinkedPressed: false,
-            mobileView: false,
             //interval
             interval: null,
 
@@ -194,9 +195,7 @@ export default {
                 this.projectLoaded = true;
                 if (this.projectLoaded) {
                     clearInterval(this.interval);
-                    console.log(this.interval)
                 }
-                console.log(this.interval)
             }, timer);
         },
 
@@ -235,10 +234,11 @@ export default {
         },
         //Close window when scrolling away from project section 
         handleScroll(event) {
-            if (!this.mobileView) {
+            if (!this.isMobileView) {
                 if (this.projectLoaded && this.projectClicked) {
                     this.projectLoaded = false;
-                    this.TransitionEnd(100);
+                    this.TransitionEnd(100); 
+                    console.log(htmlDoc);
                 }
             }
         },
@@ -250,11 +250,6 @@ export default {
     },
     created() {
         window.addEventListener('scroll', this.handleScroll);
-        if (screen.width <= 425) {
-            this.mobileView = true;
-        } else {
-            this.mobileView = false;
-        }
     },
 }
 </script>
@@ -346,13 +341,16 @@ a
     top: 175%;
     width: 100%;
     height: 800px;
+    overflow-y: scroll;
     background: #09092f;
     box-shadow: 1px 1px 40px 20px black;
 }
 
 .project-btn
 {
-    float: right;
+    position: fixed;
+    top: 45px;
+    right: 25px;
     padding-right: 30px;
     padding-top: 20px;
     font-weight: 900;
@@ -372,7 +370,7 @@ a
 {
     position: absolute;
     scale: 0.7;
-    bottom:0;
+    bottom: 0;
     right: 0;
     margin: 30px;
     transform: rotate(90deg);
@@ -399,45 +397,56 @@ a
 .project-single-container
 {
     display: flex;
+    flex-direction: column;
     text-align: center;
 }
 
 .project-image
 {
     width: 1300px;
-    height: 500px;
+    height: 550px;
     border-radius: 50px;
     object-fit: cover;
 }
 
-.aling-items {
+.aling-items
+{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.heading-img-container {
-    margin:100px 0px;
+
+.heading-img-container
+{
+    margin: 20px 0px;
 }
+
 .description-container
 {
-    width: 100%;
-    display:flex;
+    width: 50%;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
-.dif-container {
+
+.dif-container
+{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.links-container {
+.links-container
+{
     display: flex;
-    gap:10px;
+    gap: 10px;
+    margin-bottom: 100px;
 }
-.links-container a:hover {
+
+.links-container a:hover
+{
     text-decoration: underline;
 }
 
@@ -487,7 +496,6 @@ a
         overflow-y: scroll;
     }
 
-
     .project-single-container
     {
         display: flex;
@@ -530,11 +538,29 @@ a
         font-size: 18px;
     }
 
+    .description-container
+    {
+        width: 80%;
+    }
+
     .links-container
     {
         display: flex;
         gap: 20px;
         margin-bottom: 20px;
+    }
+
+    .project-btn
+    {
+        position: static;
+        float: right;
+        padding-right: 30px;
+        padding-top: 20px;
+        font-weight: 900;
+        background: none;
+        border: none;
+        font-size: 35px;
+        color: white;
     }
 }
 </style>

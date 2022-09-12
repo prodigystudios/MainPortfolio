@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div v-if="emailSent && !mobileView">" class="email-notice">
+        <div v-if="emailSent && !isMobileView">" class="email-notice">
             <h1>Tack för ditt mail!</h1>
             <h3>Jag återkommer så fort jag kan!</h3>
             <button @click="emailSent = false" class="notice-btn">Stäng!</button>
@@ -37,6 +37,7 @@
 import emailjs from 'emailjs-com';
 export default {
     name: 'ContactMe',
+    props: ['isMobileView'],
     data() {
         return {
             fname: '',
@@ -44,7 +45,6 @@ export default {
             email: '',
             message: '',
             emailSent: false,
-            mobileView: false,
         }
     },
     methods: {
@@ -75,14 +75,6 @@ export default {
             this.message = ''
         },
     },
-    created() {
-        if (screen.width <= 425) {
-            this.mobileView = true;
-        } else {
-            this.mobileView = false;
-        }
-    }
-
 }
 </script>
 
@@ -132,9 +124,15 @@ input[type=text],
     margin-bottom: 16px;
     background: rgba(173, 216, 230, 0.192);
     color: white;
+    border: 1px solid grey;
 }
+/* input:invalid{
+    border:1px solid red;
+}
+input:valid {
+    border:1px solid green;
+} */
 
-input[type=text],
 textarea
 {
     width: 100%;
@@ -163,11 +161,6 @@ input[type=submit]
 input[type=submit]:hover
 {
     background-color: #45a049;
-}
-
-input:invalid
-{
-    border: red;
 }
 
 input::placeholder,

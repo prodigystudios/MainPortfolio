@@ -16,40 +16,38 @@
         </transition>
     </div>
     <transition name="fadeOut">
-        <div v-if="showIntro && !mobileView" class="intro-container">
-            <div  class="typing">
+        <div v-if="showIntro && !isMobileView" class="intro-container">
+            <div class="typing">
                 <div class="typing-effect">
                     Hej mitt namn är William Ali. Välkommna till min portfolio!
                 </div>
             </div>
         </div>
-
     </transition>
 </template>
 <script>
 export default {
     name: 'heroSection',
+    props: ['isMobileView'],
 
-    created() {
-        this.mobileView = screen.width <= 425 ? true: false;
-        this.AnimationDuration();
-    },
     data() {
         return {
             showIntro: true,
             showImg: false,
             showHeader: false,
-            mobileView: false,
         }
+    },
+    created() {
+        this.AnimationDuration();
     },
     methods: {
         AnimationDuration() {
-            if(!this.mobileView)
-            setTimeout(() => {
-                this.showIntro = false;
-                this.showImg = true;
-                this.showHeader = true;
-            }, 3000);
+            if (!this.isMobileView)
+                setTimeout(() => {
+                    this.showIntro = false;
+                    this.showImg = true;
+                    this.showHeader = true;
+                }, 4000);
             else {
                 this.showImg = true;
                 this.showHeader = true;
@@ -60,9 +58,11 @@ export default {
 }
 </script>
 <style scoped>
-.intro-container {
+.intro-container
+{
     margin-bottom: 2000px;
 }
+
 .typing
 {
     position: absolute;
@@ -75,8 +75,8 @@ export default {
 
 .typing-effect
 {
-    width: 41ch;
-    animation: typing 2.5s steps(41), effect .5s;
+    width: 55ch;
+    animation: typing 2.5s steps(55), effect .5s;
     white-space: nowrap;
     overflow: hidden;
     border-right: 3px solid;
@@ -165,6 +165,7 @@ export default {
 .fadeOut-leave-active
 {
     transition: all 1s ease;
+
 }
 
 .fadeOut-enter-from,

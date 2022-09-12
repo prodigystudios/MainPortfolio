@@ -131,7 +131,6 @@ export default {
 {
     .container
     {
-
         margin-bottom: 5px;
     }
 }
