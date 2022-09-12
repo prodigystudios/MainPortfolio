@@ -40,9 +40,11 @@ export default {
     created() {
         this.AnimationDuration();
     },
+
     methods: {
         AnimationDuration() {
-            if (!this.isMobileView)
+            if (!this.isMobileView &&
+            performance.navigation.type != performance.navigation.TYPE_RELOAD)
                 setTimeout(() => {
                     this.showIntro = false;
                     this.showImg = true;

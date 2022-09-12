@@ -114,6 +114,7 @@ nav
 {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   background: #101036;
   height: 112px;
