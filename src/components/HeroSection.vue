@@ -216,45 +216,12 @@ export default {
     }
 }
 
-/* @media screen and (min-width: 426px),
-(max-width: 768px)
-{
-    .hero-container
-    {
-        display: flex;
-        height: 1000px;
-        align-items: center;
-        flex-direction: column-reverse;
-        margin-left: 0;
-        margin-top: 80px;
-        margin-bottom: 50px;
-        gap: 50px;
+@media screen and (min-width: 769px) and (max-width: 1440px) {
+    .hero-container h1 {
+        font-size: 35px;
     }
-
-    .hero-container h1
-    {
-        margin-top: 20px;
-        font-size: 28px;
-        width: 100%;
-        text-align: center;
-    }
-
-    .hero-container p
-    {
-        margin-top: 50px;
+    .hero-container p {
         font-size: 15px;
-        font-weight: 300;
-        line-height: 30px;
-        text-align: center;
     }
-
-    .img
-    {
-        margin-bottom: 50px;
-        width: 300px;
-        height: 300px;
-        border-radius: 300px;
-        object-fit: cover;
-    }
-} */
+}
 </style>

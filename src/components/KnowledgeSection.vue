@@ -77,9 +77,10 @@ export default {
 {
     width: 100%;
     height: 800px;
-    background: linear-gradient(45deg, #0c224467, #06375356, #0c465c63,#0f8f7131);
-    padding-top:200px;
+    background: linear-gradient(45deg, #0c224467, #06375356, #0c465c63, #0f8f7131);
+    padding-top: 200px;
 }
+
 .container h1
 {
     padding-top: 60px;
@@ -131,8 +132,23 @@ export default {
     .container
     {
         margin-bottom: 5px;
-        height:100%;
-        padding-top:0px;
+        height: 100%;
+        padding-top: 0px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1440px)
+{
+    .container
+    {
+        margin-bottom: 5px;
+        height: 100%;
+        padding-top: 0px;
+    }
+
+    .main-container
+    {
+        gap: 40vh;
     }
 }
 </style>
