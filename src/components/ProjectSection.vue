@@ -235,7 +235,7 @@ export default {
             if (!this.isMobileView) {
                 if (this.projectLoaded && this.projectClicked) {
                     this.projectLoaded = false;
-                    this.TransitionEnd(100); 
+                    this.TransitionEnd(100);
                     console.log(htmlDoc);
                 }
             }
@@ -559,6 +559,42 @@ a
         border: none;
         font-size: 35px;
         color: white;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1440px)
+{
+
+    .container
+    {
+        gap: 20px;
+        padding-top: 100px;
+
+    }
+
+    .project-card
+    {
+        width: 420px;
+        height: 620px;
+        background: #0A0A32;
+        box-shadow: 7px 12px 22px 4px rgba(0, 0, 0, 0.6);
+        border-radius: 20px;
+        text-align: center;
+        transition: 0.3s ease;
+    }
+
+    .project-container
+    {
+        top: 218%;
+    }
+
+    .project-btn
+    {
+        position: fixed;
+        top: 12px;
+        right: 20px;
+        padding-right: 30px;
+        padding-top: 20px;
     }
 }
 </style>
