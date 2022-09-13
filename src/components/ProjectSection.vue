@@ -61,9 +61,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </section>
                     </div>
                 </transition>
@@ -167,6 +164,7 @@ export default {
         },
         SetElementVisible(id) {
             if (!this.isLinkedPressed) {
+                console.log(this.isMobileView);
                 if (!this.projectClicked) {
                     this.indexSlice = id;
                     this.projectClicked = true;

@@ -86,7 +86,7 @@ export default {
     this.ScrollToAnchor('hero-section');
   },
   created() {
-    this.mobileView = screen.width <= 425 ? true : false;
+    this.mobileView = screen.width <= 768 ? true : false;
   },
   methods: {
     ScrollToAnchor(refName) {
@@ -147,10 +147,10 @@ nav
 button
 {
   font-family: Outfit;
-  font-weight: bold;
+  font-weight: 900;
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 22px;
   color: white;
   text-decoration: none;
 }
@@ -194,7 +194,7 @@ section
   border-radius: 60px;
 }
 
-@media screen and (min-width: 426px)
+@media screen and (min-width: 769px)
 {
   .navbar-desktop
   {
@@ -207,7 +207,7 @@ section
   }
 }
 
-@media screen and (max-width: 425px)
+@media screen and (max-width: 768px)
 {
 
   .navbar-desktop

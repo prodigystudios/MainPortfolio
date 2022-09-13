@@ -134,7 +134,6 @@ export default {
         height:100%;
         padding-top:0px;
     }
-    
 }
 </style>
 
