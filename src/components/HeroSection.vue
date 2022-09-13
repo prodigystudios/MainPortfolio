@@ -1,14 +1,13 @@
 <template>
     <div ref="heroRef" class="hero-container">
         <transition name="leftSlide">
-            <h1 v-if="showHeader">Blivande front-end utvecklare med stort intresse för back-end utveckling
+            <h1 v-if="showHeader">Blivande Front-End utvecklare med stort intresse för back-end utveckling
                 <p>Hej och välkomna till min portfolio. <br />
                     Mitt namn är William Ali 29 årig utvecklare från sverige.<br />
                     Har jobbat inom byggbranchen i över 10 och är nu på min resa att byta karriär till utvecklare!<br />
-                    Har länge haft intresse för att skapa saker.<br />
-                    Började min resa för att jag ville skapa spel och det ledde mig senare in på att jag ville testa
-                    på<br />
-                    webbutveckling och fastnat för det helt. Både för front- end och back-end utveckling.</p>
+                    Har länge haft intresse för att skapa saker och skapade egen musik under hela min uppväxt<br />
+                    Hade alltid velat skapa mitt eget spel så där började jag, och det ledde mig senare in på att jag ville testa<br />
+                    på webbutveckling och fastnat för det helt. Både för front- end och back-end utveckling.</p>
             </h1>
         </transition>
         <transition name="rightSlide">
@@ -108,7 +107,7 @@ export default {
     margin-top: 50px;
     font-size: 20px;
     font-weight: 400;
-    line-height: 30px;
+    line-height: 35px;
 }
 
 .img
@@ -182,6 +181,7 @@ export default {
     .hero-container
     {
         display: flex;
+        height:1000px;
         align-items: center;
         flex-direction: column-reverse;
         margin-left: 0;
@@ -192,6 +192,7 @@ export default {
 
     .hero-container h1
     {
+        margin-top:20px;
         font-size: 28px;
         width: 100%;
         text-align: center;
@@ -208,7 +209,7 @@ export default {
 
     .img
     {
-        margin-top: 80px;
+        margin-bottom: 50px;
         width: 300px;
         height: 300px;
         border-radius: 300px;

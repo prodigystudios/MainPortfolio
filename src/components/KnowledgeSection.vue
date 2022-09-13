@@ -76,11 +76,10 @@ export default {
 .container
 {
     width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(19, 16, 140, 0.4) 0%, rgba(5, 5, 31, 0.4) 100%);
-    margin-bottom: 150px;
+    height: 800px;
+    background: linear-gradient(45deg, #0c224467, #06375356, #0c465c63,#0f8f7131);
+    padding-top:200px;
 }
-
 .container h1
 {
     padding-top: 60px;
@@ -132,7 +131,10 @@ export default {
     .container
     {
         margin-bottom: 5px;
+        height:100%;
+        padding-top:0px;
     }
+    
 }
 </style>
 

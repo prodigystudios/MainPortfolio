@@ -176,7 +176,6 @@ section
 {
   scroll-margin-top: 220px;
 }
-
 .contact-section
 {
   scroll-margin-top: 300px;
