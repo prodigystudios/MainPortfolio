@@ -1,5 +1,5 @@
 <template>
-    <div class="hero-container">
+    <div ref="heroRef" class="hero-container">
         <transition name="leftSlide">
             <h1 v-if="showHeader">Blivande front-end utvecklare med stort intresse för back-end utveckling
                 <p>Hej och välkomna till min portfolio. <br />
@@ -43,32 +43,32 @@ export default {
 
     methods: {
         AnimationDuration() {
-            if (!this.isMobileView &&
-            performance.navigation.type != performance.navigation.TYPE_RELOAD)
+            
+            if (!this.isMobileView )
                 setTimeout(() => {
                     this.showIntro = false;
-                    this.showImg = true;
-                    this.showHeader = true;
-                }, 4000);
+                    setTimeout(() => { 
+                        this.showImg = true;
+                        this.showHeader = true;
+                    },500)
+                }, 3000);
             else {
                 this.showImg = true;
                 this.showHeader = true;
                 this.showIntro = false;
+                
             }
         }
     }
 }
 </script>
 <style scoped>
-.intro-container
-{
-    margin-bottom: 2000px;
-}
+
 
 .typing
 {
     position: absolute;
-    top: 400px;
+    top:400px;
     display: flex;
     width: 100%;
     height: 7vh;
@@ -77,8 +77,8 @@ export default {
 
 .typing-effect
 {
-    width: 55ch;
-    animation: typing 2.5s steps(55), effect .5s;
+    width: 41ch;
+    animation: typing 2.5s steps(41), effect .5s;
     white-space: nowrap;
     overflow: hidden;
     border-right: 3px solid;
@@ -90,7 +90,7 @@ export default {
 .hero-container
 {
     display: flex;
-    margin-top: 150px;
+    height:800px;
     margin-left: 50px;
     margin-bottom: 240px;
     gap: 200px;
@@ -98,6 +98,7 @@ export default {
 
 .hero-container h1
 {
+    margin-top: 250px;
     font-size: 55px;
     width: 50%;
 }
@@ -112,7 +113,7 @@ export default {
 
 .img
 {
-    margin-top: 80px;
+    margin-top: 250px;
     width: 484px;
     height: 451px;
     border-radius: 300px;
@@ -166,8 +167,7 @@ export default {
 .fadeOut-enter-active,
 .fadeOut-leave-active
 {
-    transition: all 1s ease;
-
+    transition: opacity 0.3s ease-out;
 }
 
 .fadeOut-enter-from,
