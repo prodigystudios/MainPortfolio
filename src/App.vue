@@ -40,9 +40,8 @@ p
   font-family: Outfit;
 }
 
-@media screen and (max-width:425px)
+@media screen and (max-width:768px)
 {
-
   html
   {
     scroll-snap-type: none;

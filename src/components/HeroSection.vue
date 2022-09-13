@@ -6,7 +6,8 @@
                     Mitt namn är William Ali 29 årig utvecklare från sverige.<br />
                     Har jobbat inom byggbranchen i över 10 och är nu på min resa att byta karriär till utvecklare!<br />
                     Har länge haft intresse för att skapa saker och skapade egen musik under hela min uppväxt<br />
-                    Hade alltid velat skapa mitt eget spel så där började jag, och det ledde mig senare in på att jag ville testa<br />
+                    Hade alltid velat skapa mitt eget spel så där började jag, och det ledde mig senare in på att jag
+                    ville testa<br />
                     på webbutveckling och fastnat för det helt. Både för front- end och back-end utveckling.</p>
             </h1>
         </transition>
@@ -42,32 +43,30 @@ export default {
 
     methods: {
         AnimationDuration() {
-            
-            if (!this.isMobileView )
+
+            if (!this.isMobileView)
                 setTimeout(() => {
                     this.showIntro = false;
-                    setTimeout(() => { 
+                    setTimeout(() => {
                         this.showImg = true;
                         this.showHeader = true;
-                    },500)
+                    }, 500)
                 }, 3000);
             else {
                 this.showImg = true;
                 this.showHeader = true;
                 this.showIntro = false;
-                
+
             }
         }
     }
 }
 </script>
 <style scoped>
-
-
 .typing
 {
     position: absolute;
-    top:400px;
+    top: 400px;
     display: flex;
     width: 100%;
     height: 7vh;
@@ -89,7 +88,7 @@ export default {
 .hero-container
 {
     display: flex;
-    height:800px;
+    height: 800px;
     margin-left: 50px;
     margin-bottom: 240px;
     gap: 200px;
@@ -175,13 +174,13 @@ export default {
     opacity: 0;
 }
 
-@media screen and (max-width: 425px)
+@media screen and (max-width: 768px)
 {
 
     .hero-container
     {
         display: flex;
-        height:1000px;
+        height: 1000px;
         align-items: center;
         flex-direction: column-reverse;
         margin-left: 0;
@@ -192,7 +191,7 @@ export default {
 
     .hero-container h1
     {
-        margin-top:20px;
+        margin-top: 20px;
         font-size: 28px;
         width: 100%;
         text-align: center;
@@ -216,4 +215,46 @@ export default {
         object-fit: cover;
     }
 }
+
+/* @media screen and (min-width: 426px),
+(max-width: 768px)
+{
+    .hero-container
+    {
+        display: flex;
+        height: 1000px;
+        align-items: center;
+        flex-direction: column-reverse;
+        margin-left: 0;
+        margin-top: 80px;
+        margin-bottom: 50px;
+        gap: 50px;
+    }
+
+    .hero-container h1
+    {
+        margin-top: 20px;
+        font-size: 28px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-container p
+    {
+        margin-top: 50px;
+        font-size: 15px;
+        font-weight: 300;
+        line-height: 30px;
+        text-align: center;
+    }
+
+    .img
+    {
+        margin-bottom: 50px;
+        width: 300px;
+        height: 300px;
+        border-radius: 300px;
+        object-fit: cover;
+    }
+} */
 </style>
