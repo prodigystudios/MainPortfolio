@@ -216,11 +216,44 @@ export default {
     }
 }
 
-@media screen and (min-width: 769px) and (max-width: 1440px) {
-    .hero-container h1 {
+@media screen and (min-width: 426px) and (max-width: 768px)
+{
+
+    .hero-container
+    {
+        display: flex;
+        height: 1000px;
+        align-items: center;
+        flex-direction: column-reverse;
+        margin-left: 0;
+        gap: 20px;
+    }
+
+
+    .hero-container h1
+    {
+        margin-top: 20px;
+        font-size: 28px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .img
+    {
+        margin-top: 50px;
+        margin-bottom: 150px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1440px)
+{
+    .hero-container h1
+    {
         font-size: 35px;
     }
-    .hero-container p {
+
+    .hero-container p
+    {
         font-size: 15px;
     }
 }
