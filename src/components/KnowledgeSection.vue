@@ -58,7 +58,7 @@
 
                 <div class="aling-items">
                     <img src="../assets/ikoner/icons8-mongodb-32.png" width="44px" height="44px" alt="mongo db icon">
-                    <p>Mongo db</p>
+                    <p>Mongo DB</p>
                 </div>
             </div>
         </div>
