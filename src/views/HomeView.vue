@@ -1,4 +1,4 @@
-<template>
+<template class="scrollisch">
 
   <nav ref="navbar" class="navbar-desktop">
     <div class="nav-links">
@@ -99,6 +99,11 @@ export default {
 </script>
 
 <style scoped>
+
+.scrollisch {
+  overflow:hidden;
+}
+
 .main-name
 {
   position: absolute;
@@ -186,7 +191,6 @@ section
   text-align: center;
   margin-bottom: 50px;
 }
-
 .end-btn
 {
   background: white;

@@ -9,8 +9,6 @@
 
 html
 {
-  overflow-y: scroll;
-  overflow-x: hidden;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
@@ -28,6 +26,10 @@ body
   background:
     linear-gradient(180.06deg, #0A0A32 52.13%, #05051F 99.95%),
     linear-gradient(180deg, #05051F 0%, rgba(14, 14, 100, 0.1) 33.48%);
+  margin: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
 }
 
 h1
@@ -40,12 +42,18 @@ p
   font-family: Outfit;
 }
 
+
 @media screen and (max-width:768px)
 {
   html
   {
     scroll-snap-type: none;
     scroll-behavior: smooth;
+  }
+
+  body
+  {
+    margin: 8px;
   }
 }
 </style>

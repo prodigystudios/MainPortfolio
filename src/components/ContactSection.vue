@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <div v-if="emailSent && !isMobileView">" class="email-notice">
-            <h1>Tack för ditt mail!</h1>
+            <h2>Tack för ditt mail!</h2>
             <h3>Jag återkommer så fort jag kan!</h3>
             <button @click="emailSent = false" class="notice-btn">Stäng!</button>
         </div>
@@ -9,7 +9,7 @@
 
     <form @submit.prevent="sendEmail" class="container">
         <div class="contactmetext">
-            <h1>Kontakta mig!</h1>
+            <h2>Kontakta mig!</h2>
         </div>
         <div class="firstname">
             <input type="text" placeholder="Förnamn" title="Måste vara minst 1 bokstav långt" required="required"
@@ -80,10 +80,11 @@ export default {
 
 
 <style scoped>
-h1
+h2
 {
     margin-top: 0;
     text-align: center;
+    font-size: 30px;
 }
 
 *
@@ -105,11 +106,10 @@ h1
         "send send";
     border-radius: 5px;
     background: linear-gradient(180deg, rgba(18, 16, 140, 0.274) 0%, rgba(5, 5, 31, 0.4) 100%);
-    padding: 80px;
+    padding: 100px;
     width: 100%;
-    height: 600px;
+    height: 650px;
     margin-bottom: 50px;
-    margin-top: 200px;
 }
 
 input[type=text],

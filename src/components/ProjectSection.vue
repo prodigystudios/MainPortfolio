@@ -1,4 +1,7 @@
 <template>
+    <div class="headline">
+        <h2>Mina projekt</h2>
+    </div>
     <div class="container">
         <div @click="SetElementVisible(project.id)" class="project-card" v-for="project in projects" :key="project.id">
             <h2>{{ project.title }}</h2>
@@ -36,7 +39,7 @@
                             v-for="project in projects.slice(indexSlice, indexSlice + 1)" :key="project.id">
                             <div class="heading-img-container">
                                 <div class="image-container">
-                                    <h1>{{ project.title }}</h1>
+                                    <h2>{{ project.title }}</h2>
                                     <img class="project-image" :src="project.img">
                                 </div>
                             </div>
@@ -161,10 +164,13 @@ export default {
                     clearInterval(this.interval);
                 }
             }, 100)
+
+            setTimeout(() => {
+                
+            }, 100);
         },
         SetElementVisible(id) {
             if (!this.isLinkedPressed) {
-                console.log(this.isMobileView);
                 if (!this.projectClicked) {
                     this.indexSlice = id;
                     this.projectClicked = true;
@@ -180,7 +186,7 @@ export default {
                     }
                 }
                 else {
-                    this.projectLoaded = false;
+                    this.projectLoaded = false;               
                     this.TransitionEnd(300);
                 }
             }
@@ -191,7 +197,9 @@ export default {
 
             this.interval = setInterval(() => {
                 this.projectLoaded = true;
+                document.body.style.overflowY = 'hidden';
                 if (this.projectLoaded) {
+
                     clearInterval(this.interval);
                 }
             }, timer);
@@ -200,10 +208,11 @@ export default {
         TransitionEnd(timer) {
 
             this.interval = setInterval(() => {
-                this.projectClicked = false;
+                this.projectClicked = false;    
                 if (!this.projectClicked) {
                     clearInterval(this.interval)
-                }
+                    document.body.style.overflowY = 'scroll';   
+                } 
             }, timer);
         },
         //buttons checks for next or last project
@@ -230,24 +239,11 @@ export default {
                 }
             }
         },
-        //Close window when scrolling away from project section 
-        handleScroll(event) {
-            if (!this.isMobileView) {
-                if (this.projectLoaded && this.projectClicked) {
-                    this.projectLoaded = false;
-                    this.TransitionEnd(100);
-                    console.log(htmlDoc);
-                }
-            }
-        },
     },
     computed: {
         lengthOfProject() {
             return this.projects.length - 1;
         }
-    },
-    created() {
-        window.addEventListener('scroll', this.handleScroll);
     },
 }
 </script>
@@ -259,6 +255,17 @@ a
     color: white;
 }
 
+.headline
+{
+    padding-top: 55px;
+}
+
+.headline h2
+{
+    text-align: center;
+    font-size: 30px;
+}
+
 .container
 {
     width: 100%;
@@ -268,7 +275,7 @@ a
     flex-wrap: wrap;
     justify-content: center;
     gap: 50px;
-    margin-top: 180px;
+    margin-top: 50px;
     margin-bottom: 100px;
 }
 
@@ -334,11 +341,11 @@ a
 
 .project-container
 {
-    position: absolute;
+    position: fixed;
     text-align: center;
-    top: 175%;
+    top: 0;
     width: 100%;
-    height: 800px;
+    height: 100%;
     overflow-y: scroll;
     background: #09092f;
     box-shadow: 1px 1px 40px 20px black;

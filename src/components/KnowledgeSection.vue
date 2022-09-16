@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>Mina kunskaper</h1>
+        <h2>Mina kunskaper</h2>
         <div class="main-container">
             <div class="sub-container">
                 <h2>Språk</h2>
@@ -78,14 +78,14 @@ export default {
     width: 100%;
     height: 800px;
     background: linear-gradient(45deg, #0c224467, #06375356, #0c465c63, #0f8f7131);
-    padding-top: 200px;
+    padding-top: 135px;
 }
 
-.container h1
+.container h2
 {
-    padding-top: 60px;
+    padding-top: 50px;
     text-align: center;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 .main-container
