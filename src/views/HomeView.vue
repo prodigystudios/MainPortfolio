@@ -91,19 +91,23 @@ export default {
   methods: {
     ScrollToAnchor(refName) {
       const el = this.$refs[refName];
+      document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection(refName)}`;
       this.mobileMenu = false;
       el.scrollIntoView({ behavior: 'smooth' })
     },
+    SetNameOfSection(refName) {
+      switch (refName) {
+        case 'hero-section': return 'Om mig';
+        case 'knowledge-section': return 'Kunskaper'
+        case 'project-section': return 'Projekt';
+        case 'contact-section': return 'Kontakt';
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
-
-.scrollisch {
-  overflow:hidden;
-}
-
 .main-name
 {
   position: absolute;
@@ -181,6 +185,7 @@ section
 {
   scroll-margin-top: 220px;
 }
+
 .contact-section
 {
   scroll-margin-top: 300px;
@@ -191,11 +196,12 @@ section
   text-align: center;
   margin-bottom: 50px;
 }
+
 .end-btn
 {
   background: white;
   width: 100px;
-  border-radius: 60px;
+  border-radius: 200px;
 }
 
 @media screen and (min-width: 769px)
@@ -256,5 +262,26 @@ section
     border-radius: 60px;
     background: white;
   }
+
+  .hero-section
+  {
+    scroll-margin-top: 100px;
+  }
+
+  .knowledge-section
+  {
+    scroll-margin-top: 100px;
+  }
+
+  .project-section
+  {
+    scroll-margin-top: 70px;
+  }
+
+  .contact-section
+  {
+    scroll-margin-top: 100px;
+  }
+
 }
 </style>
