@@ -12,7 +12,7 @@
             </h1>
         </transition>
         <transition name="rightSlide">
-            <img v-if="showImg" class="img" src="../assets/Portrait/Självporträttlol.jpg">
+            <img v-if="showImg" class="img" src="../assets/Portrait/Självporträttlol.jpg" alt="Självporträtt">
         </transition>
     </div>
     <transition name="fadeOut">

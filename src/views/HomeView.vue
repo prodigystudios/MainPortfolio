@@ -80,6 +80,14 @@ export default {
     return {
       mobileView: false,
       mobileMenu: false,
+      views: [
+        {
+          name: 'hero-section',
+        },
+        {
+          name: 'knowledge-section',
+        }
+      ]
     }
   },
   mounted() {
@@ -87,6 +95,7 @@ export default {
   },
   created() {
     this.mobileView = screen.width <= 768 ? true : false;
+    window.addEventListener('scroll', this.handleScroll);
   },
   methods: {
     ScrollToAnchor(refName) {
@@ -102,7 +111,25 @@ export default {
         case 'project-section': return 'Projekt';
         case 'contact-section': return 'Kontakt';
       }
-    }
+    },
+    handleScroll(event) {
+      console.log(window.scrollY);
+      if(window.scrollY < 1039) {
+        document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('hero-section')}`;  
+      }
+      if(window.scrollY == 1039) {
+        document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('knowledge-section')}`;    
+      }
+      if(window.scrollY == 1900) {
+        document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('project-section')}`;     
+      }
+      if(window.scrollY == 2781) {
+        document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('contact-section')}`;    
+      }
+      // 1039
+      // 1900
+      // 2781
+    },
   }
 }
 </script>

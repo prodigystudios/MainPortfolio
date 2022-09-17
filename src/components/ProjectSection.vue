@@ -5,7 +5,7 @@
     <div class="container">
         <div @click="SetElementVisible(project.id)" class="project-card" v-for="project in projects" :key="project.id">
             <h2>{{ project.title }}</h2>
-            <img class="main-image" :src="project.img">
+            <img class="main-image" :src="project.img" alt="project bild">
             <section class="aling-text-section">
                 <a @click="linkedPressed()" :href="project.githubLink" target="blank" alt="link to github">Github link:
                     klicka här</a>
@@ -15,7 +15,7 @@
             <h5>Använda Tekniker</h5>
             <div class="sub-container">
                 <div v-for="(icon, index) in project.icons" :key="index">
-                    <img class="icon-scale" :src="icon.icon">
+                    <img class="icon-scale" :src="icon.icon" alt="ikoner på använda tekniker tex javascript">
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
                             <div class="heading-img-container">
                                 <div class="image-container">
                                     <h2>{{ project.title }}</h2>
-                                    <img class="project-image" :src="project.img">
+                                    <img class="project-image" :src="project.img" alt="projekt bild">
                                 </div>
                             </div>
                             <div class="aling-items">
@@ -102,7 +102,7 @@ export default {
                     description: 'En väder applikation som använder gps lokalisering för att visa väder information för staden du är i, Du kan även fylla i en stad du väljer själv och få tillbaka väder information för dagen och dom 7 kommande dagarna',
                     img: require('@/assets/Projectbilder/Home.png'),
                     githubLink: 'https://github.com/prodigystudios/weatherapp',
-                    liveLink: 'https://prodigystudios.github.io/weatherapp/#/',
+                    liveLink: 'https://williamali.se/V%c3%a4der/#/',
                     icons: [
                         {
                             icon: require('@/assets/ikoner/icons8-html-5-32.png'),
@@ -164,10 +164,6 @@ export default {
                     clearInterval(this.interval);
                 }
             }, 100)
-
-            setTimeout(() => {
-                
-            }, 100);
         },
         SetElementVisible(id) {
             if (!this.isLinkedPressed) {
@@ -186,7 +182,7 @@ export default {
                     }
                 }
                 else {
-                    this.projectLoaded = false;               
+                    this.projectLoaded = false;
                     this.TransitionEnd(300);
                 }
             }
@@ -208,11 +204,11 @@ export default {
         TransitionEnd(timer) {
 
             this.interval = setInterval(() => {
-                this.projectClicked = false;    
+                this.projectClicked = false;
                 if (!this.projectClicked) {
                     clearInterval(this.interval)
-                    document.body.style.overflowY = 'scroll';   
-                } 
+                    document.body.style.overflowY = 'scroll';
+                }
             }, timer);
         },
         //buttons checks for next or last project
