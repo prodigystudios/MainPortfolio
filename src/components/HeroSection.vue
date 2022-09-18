@@ -26,6 +26,7 @@
     </transition>
 </template>
 <script>
+
 export default {
     name: 'heroSection',
     props: ['isMobileView'],
@@ -35,10 +36,19 @@ export default {
             showIntro: true,
             showImg: false,
             showHeader: false,
+            testdb: [],
         }
     },
     created() {
         this.AnimationDuration();
+
+        fetch('https://williamali.se/php/')
+        
+        .then((response) => response.json())       
+        .then((data) => {
+            this.testdb = data;
+            console.log(this.testdb);
+        });
     },
 
     methods: {
@@ -174,6 +184,12 @@ export default {
     opacity: 0;
 }
 
+
+.test {
+    position: absolute;
+    top:50%;
+    right:50%;
+}
 @media screen and (max-width: 768px)
 {
 

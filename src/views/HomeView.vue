@@ -1,5 +1,4 @@
 <template class="scrollisch">
-
   <nav ref="navbar" class="navbar-desktop">
     <div class="nav-links">
       <div class="dropdown-menu">
@@ -113,8 +112,7 @@ export default {
       }
     },
     handleScroll(event) {
-      console.log(window.scrollY);
-      if(window.scrollY < 1039) {
+      if(window.scrollY < 100) {
         document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('hero-section')}`;  
       }
       if(window.scrollY == 1039) {
@@ -130,6 +128,7 @@ export default {
       // 1900
       // 2781
     },
+  
   }
 }
 </script>

@@ -19,7 +19,6 @@
                 </div>
             </div>
         </div>
-
         <!-- single project elements -->
         <transition name="close">
             <div v-if="projectClicked" class="project-container">
@@ -34,7 +33,7 @@
                             <arrow />
                         </button>
 
-
+                        
                         <section class="project-single-container"
                             v-for="project in projects.slice(indexSlice, indexSlice + 1)" :key="project.id">
                             <div class="heading-img-container">
@@ -45,19 +44,19 @@
                             </div>
                             <div class="aling-items">
                                 <div class="description-container">
-                                    <h4>Beskrivning</h4>
+                                    <h2>Beskrivning</h2>
                                     <p>{{ project.description }}</p>
                                 </div>
 
                                 <div class="dif-container">
-                                    <h4>Svårigheter</h4>
-                                    <p>Svårt</p>
+                                    <h2>Svårigheter</h2>
+                                    <p>{{project.overcommings}}</p>
                                 </div>
 
                                 <div class="project-links">
-                                    <h4>Länkar</h4>
+                                    <h2>Länkar</h2>
                                     <div class="links-container">
-                                        <a :href="project.githubLink" target="blank" alt="link to github">Github link:
+                                        <a :href="project.githubLink" target="blank" alt="link to github">Github:
                                             klicka här</a>
                                         <a :href="project.liveLink" target="blank" alt="link to live site">Live site:
                                             klicka här</a>
@@ -73,11 +72,10 @@
     </div>
 
 </template>
-
 <script>
-import Arrow from './Arrow.vue';
-export default {
-    components: { Arrow },
+    import Arrow from './Arrow.vue';
+    export default {
+        components: { Arrow },
     name: 'ProjectSection',
     props: ['isMobileView'],
 
@@ -98,8 +96,9 @@ export default {
             projects: [
                 {
                     id: 0,
-                    title: 'Väder applikation0',
+                    title: 'Väder applikation',
                     description: 'En väder applikation som använder gps lokalisering för att visa väder information för staden du är i, Du kan även fylla i en stad du väljer själv och få tillbaka väder information för dagen och dom 7 kommande dagarna',
+                    overcommings: 'Det svåraste med det här projeket var nog att hantera vilken information jag behövde från api och hur man kommer åt den. Man fick tillbaka väldigt många object som i sin tur hade ett par object inom sig själva. När jag väl listat ut hur jag skulle separera information från dom olika objekten var det inga problem!',
                     img: require('@/assets/Projectbilder/Home.png'),
                     githubLink: 'https://github.com/prodigystudios/weatherapp',
                     liveLink: 'https://williamali.se/V%c3%a4der/#/',
@@ -113,14 +112,19 @@ export default {
                         {
                             icon: require('@/assets/ikoner/icons8-javascript-32.png')
                         },
+                        {
+                            icon: require('@/assets/logo.png')
+                        }
                     ]
                 },
                 {
                     id: 1,
-                    title: 'Väder applikation1',
-                    img: require('@/assets/Projectbilder/Home.png'),
-                    githubLink: 'https://github.com/prodigystudios/weatherapp',
-                    liveLink: 'https://prodigystudios.github.io/weatherapp/#/',
+                    title: 'Att göra lista',
+                    description: 'En enkel att göra lista där du kan lägga till saker som du behöver göra. Markera avklarade uppgifter eller ta bort dom helt när du är klar!',
+                    overcommings: 'Det svåraste i den här projeket var att få firebase att fungera. Det var första gången jag använt den tjänsten. Dokumentationen på deras hemsida var väldigt lättläst och efter ett par timmar hade jag en fungerande version med deras databas',
+                    img: require('@/assets/Projectbilder/Att göra lista/Main.png'),
+                    githubLink: 'https://github.com/prodigystudios/todo-firebase',
+                    liveLink: 'https://williamali.se/todo/#/',
                     icons: [
                         {
                             icon: require('@/assets/ikoner/icons8-html-5-32.png'),
@@ -131,6 +135,12 @@ export default {
                         {
                             icon: require('@/assets/ikoner/icons8-javascript-32.png')
                         },
+                        {
+                            icon: require('@/assets/logo.png')
+                        },
+                        {
+                            icon: require('@/assets/ikoner/icons8-firebase-32.png')
+                        }
                     ]
                 },
                 {
@@ -171,12 +181,15 @@ export default {
                     this.indexSlice = id;
                     this.projectClicked = true;
                     this.TransitionLoad(800);
+
                     if (id == 0) {
                         this.startOfProjectList = true;
                     }
+
                     if (id > 0 && id != this.lengthOfProject) {
                         this.startOfProjectList = false;
                     }
+
                     if (id == this.lengthOfProject) {
                         this.endOfProjectList = true;
                     }
@@ -219,9 +232,7 @@ export default {
                 this.TransitionLoad(500);
                 this.indexSlice++;
                 this.startOfProjectList = false;
-                if (this.indexSlice == this.lengthOfProject) {
-                    this.endOfProjectList = true;
-                }
+                this.endOfProjectList = this.indexSlice == this.lengthOfProject ? true : false;
             }
         },
         PriveousProject() {
@@ -230,9 +241,7 @@ export default {
                 this.TransitionLoad(500);
                 this.indexSlice--;
                 this.endOfProjectList = false;
-                if (this.indexSlice == 0) {
-                    this.startOfProjectList = true;
-                }
+                this.startOfProjectList = this.indexSlice == 0 ? true : false;
             }
         },
     },
@@ -404,10 +413,11 @@ a
 
 .project-image
 {
-    width: 1300px;
-    height: 550px;
-    border-radius: 50px;
+    width: 1500px;
+    height: 700px;
+    border-radius: 100px;
     object-fit: cover;
+    border: 1px solid black;
 }
 
 .aling-items
@@ -433,7 +443,7 @@ a
 
 .dif-container
 {
-    width: 100%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;

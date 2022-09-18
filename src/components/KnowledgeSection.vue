@@ -60,6 +60,11 @@
                     <img src="../assets/ikoner/icons8-mongodb-32.png" width="44px" height="44px" alt="mongo db icon">
                     <p>Mongo DB</p>
                 </div>
+
+                <div class="aling-items">
+                    <img src="../assets/ikoner/icons8-firebase-32.png" width="44px" height="44px" alt="mongo db icon">
+                    <p>Firebase</p>
+                </div>
             </div>
         </div>
     </div>
