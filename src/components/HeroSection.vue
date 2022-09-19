@@ -16,7 +16,7 @@
         </transition>
     </div>
     <transition name="fadeOut">
-        <div v-if="showIntro && !isMobileView" class="intro-container">
+        <div v-if="showIntro" class="intro-container">
             <div class="typing">
                 <div class="typing-effect">
                     Hej mitt namn är William Ali. Välkommna till min portfolio!
@@ -43,31 +43,24 @@ export default {
         this.AnimationDuration();
 
         fetch('https://williamali.se/php/')
-        
-        .then((response) => response.json())       
-        .then((data) => {
-            this.testdb = data;
-            console.log(this.testdb);
-        });
+
+            .then((response) => response.json())
+            .then((data) => {
+                this.testdb = data;
+                console.log(this.testdb);
+            });
     },
 
     methods: {
         AnimationDuration() {
 
-            if (!this.isMobileView)
-                setTimeout(() => {
-                    this.showIntro = false;
-                    setTimeout(() => {
-                        this.showImg = true;
-                        this.showHeader = true;
-                    }, 500)
-                }, 3000);
-            else {
-                this.showImg = true;
-                this.showHeader = true;
+            setTimeout(() => {
                 this.showIntro = false;
-
-            }
+                setTimeout(() => {
+                    this.showImg = true;
+                    this.showHeader = true;
+                }, 500)
+            }, 3000);
         }
     }
 }
@@ -185,11 +178,13 @@ export default {
 }
 
 
-.test {
+.test
+{
     position: absolute;
-    top:50%;
-    right:50%;
+    top: 50%;
+    right: 50%;
 }
+
 @media screen and (max-width: 768px)
 {
 
@@ -230,36 +225,30 @@ export default {
         border-radius: 300px;
         object-fit: cover;
     }
-}
 
-@media screen and (min-width: 426px) and (max-width: 768px)
-{
-
-    .hero-container
+    .typing
     {
+        position: absolute;
+        top: 400px;
         display: flex;
-        height: 1000px;
-        align-items: center;
-        flex-direction: column-reverse;
-        margin-left: 0;
-        gap: 20px;
-    }
-
-
-    .hero-container h1
-    {
-        margin-top: 20px;
-        font-size: 28px;
+        justify-content: center;
+        overflow: auto;
         width: 100%;
-        text-align: center;
+        height: 2.8vh;
     }
 
-    .img
+    .typing-effect
     {
-        margin-top: 50px;
-        margin-bottom: 150px;
+        width: 41ch;
+        animation: typing 2.5s steps(41), effect .5s;
+        white-space: nowrap;
+        border-right: 3px solid;
+        font-family: Kodchasan;
+        font-weight: 900;
+        font-size: 0.9em;
     }
 }
+
 
 @media screen and (min-width: 769px) and (max-width: 1440px)
 {

@@ -2,70 +2,76 @@
     <div class="container">
         <h2>Mina kunskaper</h2>
         <div class="main-container">
-            <div class="sub-container">
-                <h2>Språk</h2>
+            <transition name="slide-left">
+                <div v-if="isViewing || isMobileView" class="sub-container">
 
-                <div class="aling-items">
-                    <img src="../assets/ikoner/icons8-html-5-32.png" width="44px" height="44px" alt="html icon">
-                    <p>Html</p>
+                    <h2>Språk</h2>
+                    <div class="aling-items">
+                        <img src="../assets/ikoner/icons8-html-5-32.png" width="44px" height="44px" alt="html icon">
+                        <p>Html</p>
+                    </div>
+
+                    <div class="aling-items">
+                        <img src="../assets/ikoner/icons8-css3-32.png" width="44px" height="44px" alt="css icon">
+                        <p>Css</p>
+                    </div>
+
+                    <div class="aling-items">
+                        <img src="../assets/ikoner/icons8-javascript-32.png" width="44px" height="44px" alt="js icon">
+                        <p>Js</p>
+                    </div>
+
+                    <div class="aling-items">
+                        <img src="../assets/ikoner/icons8-c-sharp-logo-32.png" width="44px" height="44px"
+                            alt="c-sharp icon">
+                        <p>C#</p>
+                    </div>
                 </div>
+            </transition>
+            <transition name="slide-up">
+                <div v-if="isViewing || isMobileView" class="sub-container">
+                    <h2>Frameworks</h2>
 
-                <div class="aling-items">
-                    <img src="../assets/ikoner/icons8-css3-32.png" width="44px" height="44px" alt="css icon">
-                    <p>Css</p>
+                    <div class="aling-items">
+                        <img src="../assets/ikoner/icons8-.net-framework-32.png" width="44px" height="44px"
+                            alt="net framework icon">
+                        <p>ASP.NET</p>
+                    </div>
+
+                    <div class="aling-items">
+                        <img src="../assets/ikoner/icons8-.net-framework-32.png" width="44px" height="44px"
+                            alt="net framework entity framwork icon">
+                        <p>Entity Framework</p>
+                    </div>
+
+                    <div class="aling-items">
+                        <img src="../assets/logo.png" width="44px" height="44px" alt="vue js icon">
+                        <p>Vue Js</p>
+                    </div>
                 </div>
+            </transition>
+            <transition name="slide-right">
+                <div v-if="isViewing || isMobileView" class="sub-container">
 
-                <div class="aling-items">
-                    <img src="../assets/ikoner/icons8-javascript-32.png" width="44px" height="44px" alt="js icon">
-                    <p>Js</p>
+                    <h2>Databaser</h2>
+                    <div class="aling-items">
+                        <img src="../assets/ikoner/icons8-sql-32.png" width="44px" height="44px" alt="sql icon">
+                        <p>SQL</p>
+                    </div>
+
+                    <div class="aling-items">
+                        <img src="../assets/ikoner/icons8-mongodb-32.png" width="44px" height="44px"
+                            alt="mongo db icon">
+                        <p>Mongo DB</p>
+                    </div>
+
+                    <div class="aling-items">
+                        <img src="../assets/ikoner/icons8-firebase-32.png" width="44px" height="44px"
+                            alt="mongo db icon">
+                        <p>Firebase</p>
+                    </div>
                 </div>
-
-                <div class="aling-items">
-                    <img src="../assets/ikoner/icons8-c-sharp-logo-32.png" width="44px" height="44px"
-                        alt="c-sharp icon">
-                    <p>C#</p>
-                </div>
-            </div>
-
-            <div class="sub-container">
-                <h2>Frameworks</h2>
-
-                <div class="aling-items">
-                    <img src="../assets/ikoner/icons8-.net-framework-32.png" width="44px" height="44px"
-                        alt="net framework icon">
-                    <p>ASP.NET</p>
-                </div>
-
-                <div class="aling-items">
-                    <img src="../assets/ikoner/icons8-.net-framework-32.png" width="44px" height="44px"
-                        alt="net framework entity framwork icon">
-                    <p>Entity Framework</p>
-                </div>
-
-                <div class="aling-items">
-                    <img src="../assets/logo.png" width="44px" height="44px" alt="vue js icon">
-                    <p>Vue Js</p>
-                </div>
-            </div>
-
-            <div class="sub-container">
-
-                <h2>Databaser</h2>
-                <div class="aling-items">
-                    <img src="../assets/ikoner/icons8-sql-32.png" width="44px" height="44px" alt="sql icon">
-                    <p>SQL</p>
-                </div>
-
-                <div class="aling-items">
-                    <img src="../assets/ikoner/icons8-mongodb-32.png" width="44px" height="44px" alt="mongo db icon">
-                    <p>Mongo DB</p>
-                </div>
-
-                <div class="aling-items">
-                    <img src="../assets/ikoner/icons8-firebase-32.png" width="44px" height="44px" alt="mongo db icon">
-                    <p>Firebase</p>
-                </div>
-            </div>
+            </transition>
         </div>
     </div>
 
@@ -73,8 +79,11 @@
 
 <script>
 export default {
-    name: 'KnowledgeSection'
+    name: 'KnowledgeSection',
+    props: ['isViewing', 'isMobileView'],
 }
+
+
 </script>
 
 <style scoped>
@@ -84,6 +93,12 @@ export default {
     height: 800px;
     background: linear-gradient(45deg, #0c224467, #06375356, #0c465c63, #0f8f7131);
     padding-top: 135px;
+}
+
+img
+{
+    width: 44px;
+    height: 44px;
 }
 
 .container h2
@@ -130,6 +145,45 @@ export default {
     display: flex;
     gap: 5px;
     align-items: center;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active
+{
+    transition: all 1.5s ease;
+}
+
+.slide-left-enter-from,
+.slide-left-leave-to
+{
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active
+{
+    transition: all 1.5s ease;
+}
+
+.slide-right-enter-from,
+.slide-right-leave-to
+{
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active
+{
+    transition: all 1s ease;
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to
+{
+    transform: translateY(100%);
+    opacity: 0;
 }
 
 @media screen and (max-width: 768px)

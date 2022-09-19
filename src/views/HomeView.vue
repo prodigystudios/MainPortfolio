@@ -30,12 +30,14 @@
         <h1>X</h1>
       </button>
     </div>
+    <transition name="slide-right">
     <div v-if="mobileMenu" class="menu-container">
       <button @click="ScrollToAnchor('hero-section')">Om mig</button>
       <button @click="ScrollToAnchor('knowledge-section')">Kunskaper</button>
       <button @click="ScrollToAnchor('project-section')">Projekt</button>
       <button @click="ScrollToAnchor('contact-section')">Kontakt</button>
     </div>
+  </transition>
   </nav>
 
   <div class="wrapper">
@@ -46,7 +48,7 @@
     </section>
     <section>
       <div ref="knowledge-section" class="knowledge-section">
-        <knowledge-section />
+        <knowledge-section :isViewing="isViewing" :isMobileView="mobileView" />
       </div>
     </section>
     <section>
@@ -77,6 +79,7 @@ export default {
   components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection, Arrow },
   data() {
     return {
+      isViewing: false,
       mobileView: false,
       mobileMenu: false,
       views: [
@@ -112,23 +115,23 @@ export default {
       }
     },
     handleScroll(event) {
-      if(window.scrollY < 100) {
-        document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('hero-section')}`;  
+      if (!this.mobileView) {
+
+        if (window.scrollY < 100) {
+          document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('hero-section')}`;
+        }
+        if (window.scrollY == 1039) {
+          document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('knowledge-section')}`;
+          this.isViewing = true;
+        }
+        if (window.scrollY == 1900) {
+          document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('project-section')}`;
+        }
+        if (window.scrollY == 2781) {
+          document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('contact-section')}`;
+        }
       }
-      if(window.scrollY == 1039) {
-        document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('knowledge-section')}`;    
-      }
-      if(window.scrollY == 1900) {
-        document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('project-section')}`;     
-      }
-      if(window.scrollY == 2781) {
-        document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('contact-section')}`;    
-      }
-      // 1039
-      // 1900
-      // 2781
     },
-  
   }
 }
 </script>
@@ -230,6 +233,19 @@ section
   border-radius: 200px;
 }
 
+.slide-right-enter-active,
+.slide-right-leave-active
+{
+    transition: all 0.5s ease;
+}
+
+.slide-right-enter-from,
+.slide-right-leave-to
+{
+    transform: translateX(100%);
+    opacity: 0.8;
+}
+
 @media screen and (min-width: 769px)
 {
   .navbar-desktop
@@ -271,9 +287,11 @@ section
     justify-content: center;
     gap: 20px;
     background: #0a0a32;
-    height: 400px;
+    height: 500px;
   }
-
+  .menu-button {
+    height:25px;
+  }
   .hamburger-container
   {
     display: flex;
