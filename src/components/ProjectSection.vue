@@ -5,11 +5,15 @@
     <div class="container">
         <div @click="SetElementVisible(project.id)" class="project-card" v-for="project in projects" :key="project.id">
             <h2>{{ project.title }}</h2>
-            <img class="main-image" :src="project.img" alt="project bild">
+            <img class="main-image" :src="project.defaultImg" alt="project bild">
             <section class="aling-text-section">
                 <a @click="linkedPressed()" :href="project.githubLink" target="blank" alt="link to github">Github link:
                     klicka här</a>
-                <a @click="linkedPressed()" :href="project.liveLink" target="blank" alt="link to live site">Live site:
+                <a v-if="project.liveLink.length > 5" @click="linkedPressed()" :href="project.liveLink" target="blank"
+                    alt="link to live site">Live site:
+                    klicka här</a>
+                <a v-else @click="linkedPressed()" style="visibility: hidden;" :href="project.liveLink" target="blank"
+                    alt="link to live site">Live site:
                     klicka här</a>
             </section>
             <h5>Använda Tekniker</h5>
@@ -33,15 +37,25 @@
                             <arrow />
                         </button>
 
-                        
+
                         <section class="project-single-container"
                             v-for="project in projects.slice(indexSlice, indexSlice + 1)" :key="project.id">
                             <div class="heading-img-container">
-                                <div class="image-container">
-                                    <h2>{{ project.title }}</h2>
-                                    <img class="project-image" :src="project.img" alt="projekt bild">
-                                </div>
+                                <h2>{{ project.title }}</h2>
                             </div>
+                            <div v-if="!isMobileView" class="image-container">
+                                <div class="image-selector">
+                                    <div v-for="(image,index) in project.imageSelector" :key="index"
+                                        class="selected-image-container">
+                                        <img @click="SetSelectedImg(index)" :src="image.img">
+                                    </div>
+                                </div>
+                                <img class="project-image" :src="project.img" alt="projekt bild">
+                            </div>
+                            <div v-else class="image-container">
+                                <img class="project-image" :src="project.img" alt="projekt bild">
+                            </div>
+
                             <div class="aling-items">
                                 <div class="description-container">
                                     <h2>Beskrivning</h2>
@@ -73,9 +87,9 @@
 
 </template>
 <script>
-    import Arrow from './Arrow.vue';
-    export default {
-        components: { Arrow },
+import Arrow from './Arrow.vue';
+export default {
+    components: { Arrow },
     name: 'ProjectSection',
     props: ['isMobileView'],
 
@@ -92,16 +106,25 @@
 
             //where to slice array
             indexSlice: 0,
-
             projects: [
                 {
                     id: 0,
                     title: 'Väder applikation',
+                    img: require('@/assets/Projectbilder/WheaterApp/Home-cloudy.png'),
+                    defaultImg: require('@/assets/Projectbilder/WheaterApp/Home-cloudy.png'),
                     description: 'En väder applikation som använder gps lokalisering för att visa väder information för staden du är i, Du kan även fylla i en stad du väljer själv och få tillbaka väder information för dagen och dom 7 kommande dagarna',
                     overcommings: 'Det svåraste med det här projeket var nog att hantera vilken information jag behövde från api och hur man kommer åt den. Man fick tillbaka väldigt många object som i sin tur hade ett par object inom sig själva. När jag väl listat ut hur jag skulle separera information från dom olika objekten var det inga problem!',
-                    img: require('@/assets/Projectbilder/Home.png'),
                     githubLink: 'https://github.com/prodigystudios/weatherapp',
-                    liveLink: 'https://williamali.se/V%c3%a4der/#/',
+                    liveLink: 'https://williamali.se/weather/#/',
+                    imageSelector: [
+                        {
+                            img: require('@/assets/Projectbilder/WheaterApp/Home-clear.png'),
+                        },
+                        {
+                            img: require('@/assets/Projectbilder/WheaterApp/Home-cloudy.png'),
+                        },
+
+                    ],
                     icons: [
                         {
                             icon: require('@/assets/ikoner/icons8-html-5-32.png'),
@@ -120,11 +143,21 @@
                 {
                     id: 1,
                     title: 'Att göra lista',
+                    defaultImg: require('@/assets/Projectbilder/Att göra lista/Main.png'),
+                    img: require('@/assets/Projectbilder/Att göra lista/Main.png'),
                     description: 'En enkel att göra lista där du kan lägga till saker som du behöver göra. Markera avklarade uppgifter eller ta bort dom helt när du är klar!',
                     overcommings: 'Det svåraste i den här projeket var att få firebase att fungera. Det var första gången jag använt den tjänsten. Dokumentationen på deras hemsida var väldigt lättläst och efter ett par timmar hade jag en fungerande version med deras databas',
-                    img: require('@/assets/Projectbilder/Att göra lista/Main.png'),
                     githubLink: 'https://github.com/prodigystudios/todo-firebase',
                     liveLink: 'https://williamali.se/todo/#/',
+                    imageSelector: [
+                        {
+                            img: require('@/assets/Projectbilder/WebShop/Home.png'),
+                        },
+                        {
+                            img: require('@/assets/Projectbilder/WebShop/KöpView.png'),
+                        },
+
+                    ],
                     icons: [
                         {
                             icon: require('@/assets/ikoner/icons8-html-5-32.png'),
@@ -145,10 +178,24 @@
                 },
                 {
                     id: 2,
-                    title: 'Väder applikation2',
-                    img: require('@/assets/Projectbilder/Home.png'),
-                    githubLink: 'https://github.com/prodigystudios/weatherapp',
-                    liveLink: 'https://prodigystudios.github.io/weatherapp/#/',
+                    title: 'WebShop',
+                    defaultImg: require('@/assets/Projectbilder/WebShop/Home.png'),
+                    img: require('@/assets/Projectbilder/WebShop/Home.png'),
+                    description: 'En enkel att göra lista där du kan lägga till saker som du behöver göra. Markera avklarade uppgifter eller ta bort dom helt när du är klar!',
+                    overcommings: 'Det svåraste i den här projeket var att få firebase att fungera. Det var första gången jag använt den tjänsten. Dokumentationen på deras hemsida var väldigt lättläst och efter ett par timmar hade jag en fungerande version med deras databas',
+                    githubLink: '',
+                    liveLink: '',
+                    imageSelector: [
+                        {
+                            img: require('@/assets/Projectbilder/WebShop/Home.png'),
+                        },
+                        {
+                            img: require('@/assets/Projectbilder/WebShop/KöpView.png'),
+                        },
+                        {
+                            img: require('@/assets/Projectbilder/WebShop/ProductView.png'),
+                        },
+                    ],
                     icons: [
                         {
                             icon: require('@/assets/ikoner/icons8-html-5-32.png'),
@@ -158,6 +205,15 @@
                         },
                         {
                             icon: require('@/assets/ikoner/icons8-javascript-32.png')
+                        },
+                        {
+                            icon: require('@/assets/logo.png')
+                        },
+                        {
+                            icon: require('@/assets/ikoner/icons8-sql-32.png')
+                        },
+                        {
+                            icon: require('@/assets/ikoner/icons8-.net-framework-32.png')
                         },
                     ]
                 },
@@ -203,7 +259,6 @@
 
         //transition with timer to handle animations loading
         TransitionLoad(timer) {
-
             this.interval = setInterval(() => {
                 this.projectLoaded = true;
                 document.body.style.overflowY = 'hidden';
@@ -215,7 +270,6 @@
         },
 
         TransitionEnd(timer) {
-
             this.interval = setInterval(() => {
                 this.projectClicked = false;
                 if (!this.projectClicked) {
@@ -244,7 +298,13 @@
                 this.startOfProjectList = this.indexSlice == 0 ? true : false;
             }
         },
+        SetSelectedImg(id) {
+            const selectedImg = this.projects[this.indexSlice].imageSelector[id].img;
+            this.projects[this.indexSlice].img = selectedImg;
+        },
     },
+
+
     computed: {
         lengthOfProject() {
             return this.projects.length - 1;
@@ -254,6 +314,7 @@
 </script>
 
 <style scoped>
+/* Main */
 a
 {
     text-decoration: none;
@@ -344,6 +405,7 @@ a
     height: 44px;
 }
 
+/* SINGLE PROJECT VIEW */
 .project-container
 {
     position: fixed;
@@ -373,6 +435,7 @@ a
 .project-btn:hover
 {
     cursor: pointer;
+    filter: drop-shadow(0px 0px 10px #4444d1) brightness(200%);
 }
 
 .right-button,
@@ -400,7 +463,7 @@ a
 .right-button:hover,
 .left-button:hover
 {
-    background-color: rgba(109, 107, 243, 0.767);
+    filter: drop-shadow(0px 0px 10px #4444d1) brightness(200%);
     cursor: pointer;
 }
 
@@ -413,11 +476,39 @@ a
 
 .project-image
 {
-    width: 1500px;
+    width: 1400px;
     height: 700px;
     border-radius: 100px;
     object-fit: cover;
     border: 1px solid black;
+}
+
+.image-container
+{
+    display: flex;
+}
+
+.image-selector
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0px 30px;
+    row-gap: 10px;
+}
+
+.selected-image-container img
+{
+    width: 200px;
+    height: fit-content;
+    object-fit: contain;
+    transition: all 0.1s ease;
+    border-radius: 15px;
+}
+
+.selected-image-container img:hover
+{
+    outline: 2.5px solid lightcoral;
 }
 
 .aling-items
@@ -536,8 +627,9 @@ a
     .project-image
     {
         width: 100%;
-        height: 600px;
+        height: fit-content;
         border-radius: 50px;
+        object-fit: scale-down;
     }
 
     .aling-text-section
@@ -572,6 +664,22 @@ a
         border: none;
         font-size: 35px;
         color: white;
+    }
+
+    .description-container
+    {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dif-container
+    {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
