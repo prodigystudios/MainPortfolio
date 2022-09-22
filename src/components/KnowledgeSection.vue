@@ -3,7 +3,7 @@
         <h2>Mina kunskaper</h2>
         <div class="main-container">
             <transition name="slide-left">
-                <div v-if="isViewing || isMobileView" class="sub-container">
+                <div v-if="isKnowledgeSection || isMobileView" class="sub-container">
 
                     <h2>Språk</h2>
                     <div class="aling-items">
@@ -29,7 +29,7 @@
                 </div>
             </transition>
             <transition name="slide-up">
-                <div v-if="isViewing || isMobileView" class="sub-container">
+                <div v-if="isKnowledgeSection || isMobileView" class="sub-container">
                     <h2>Frameworks</h2>
 
                     <div class="aling-items">
@@ -51,7 +51,7 @@
                 </div>
             </transition>
             <transition name="slide-right">
-                <div v-if="isViewing || isMobileView" class="sub-container">
+                <div v-if="isKnowledgeSection || isMobileView" class="sub-container">
 
                     <h2>Databaser</h2>
                     <div class="aling-items">
@@ -80,7 +80,7 @@
 <script>
 export default {
     name: 'KnowledgeSection',
-    props: ['isViewing', 'isMobileView'],
+    props: ['isKnowledgeSection', 'isMobileView'],
 }
 
 
@@ -150,7 +150,7 @@ img
 .slide-left-enter-active,
 .slide-left-leave-active
 {
-    transition: all 1.5s ease;
+    transition: all 1.2s ease;
 }
 
 .slide-left-enter-from,
@@ -163,7 +163,7 @@ img
 .slide-right-enter-active,
 .slide-right-leave-active
 {
-    transition: all 1.5s ease;
+    transition: all 1.2s ease;
 }
 
 .slide-right-enter-from,
@@ -176,13 +176,13 @@ img
 .slide-up-enter-active,
 .slide-up-leave-active
 {
-    transition: all 1s ease;
+    transition: all 1.2s ease;
 }
 
 .slide-up-enter-from,
 .slide-up-leave-to
 {
-    transform: translateY(100%);
+    transform: translateY(38%);
     opacity: 0;
 }
 

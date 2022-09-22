@@ -1,4 +1,4 @@
-<template class="scrollisch">
+<template>
   <nav ref="navbar" class="navbar-desktop">
     <div class="nav-links">
       <div class="dropdown-menu">
@@ -15,7 +15,6 @@
       <button @click="ScrollToAnchor('contact-section')">Kontakt</button>
     </div>
   </nav>
-
   <nav class="navbar-mobile">
     <div class="nav-links">
       <button class="main-name" @click="ScrollToAnchor('hero-section')">William ali</button>
@@ -48,7 +47,7 @@
     </section>
     <section>
       <div ref="knowledge-section" class="knowledge-section">
-        <knowledge-section :isViewing="isViewing" :isMobileView="mobileView" />
+        <knowledge-section :isKnowledgeSection="isKnowledgeSection" :isMobileView="mobileView" />
       </div>
     </section>
     <section>
@@ -79,7 +78,8 @@ export default {
   components: { HeroSection, KnowledgeSection, ProjectSection, ContactSection, Arrow },
   data() {
     return {
-      isViewing: false,
+      isHeroSection:false,
+      isKnowledgeSection: false,
       mobileView: false,
       mobileMenu: false,
       views: [
@@ -116,19 +116,21 @@ export default {
     },
     handleScroll(event) {
       if (!this.mobileView) {
-
         if (window.scrollY < 100) {
           document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('hero-section')}`;
+          this.isKnowledgeSection = false;
         }
-        if (window.scrollY == 1039) {
+        if (window.scrollY > 1000 && window.scrollY <= 1059) {
           document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('knowledge-section')}`;
-          this.isViewing = true;
+          this.isKnowledgeSection = true;
         }
-        if (window.scrollY == 1900) {
+        if (window.scrollY > 1200 && window.scrollY <= 1920) {
           document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('project-section')}`;
+          this.isKnowledgeSection = false;
         }
-        if (window.scrollY == 2781) {
+        if (window.scrollY > 2200 && window.scrollY <= 2801) {
           document.title = `${process.env.VUE_APP_TITLE} - ${this.SetNameOfSection('contact-section')}`;
+          this.isKnowledgeSection = false;
         }
       }
     },

@@ -1,18 +1,17 @@
 <template>
     <div ref="heroRef" class="hero-container">
         <transition name="leftSlide">
-            <h1 v-if="showHeader">Blivande Front-End utvecklare med stort intresse för back-end utveckling
+            <h1 v-if="showHeroSection">Blivande Front-End utvecklare med stort intresse för back-end utveckling
                 <p>Hej och välkomna till min portfolio. <br />
                     Mitt namn är William Ali, 29 årig utvecklare från sverige.<br />
                     Har jobbat inom byggbranchen i över 10 och är nu på min resa att byta karriär till utvecklare!<br />
-                    Har länge haft intresse för att skapa saker och skapade egen musik under hela min uppväxt<br />
-                    Har alltid velat skapa mitt eget spel så där började jag, och det ledde mig senare in på att jag
-                    ville testa<br />
-                    på webbutveckling och fastnat för det helt. Både för front- end och back-end utveckling.</p>
+                    Har länge haft intresse för att skapa saker och skapade egen musik under hela min uppväxt.<br />
+                    Har alltid tyckt att programmering varit intressant och alltid velat pröva på att göra ett eget spel <br/>
+                    och det har nu lett mig in på webutveckling, både som front-end och back-end!</p>
             </h1>
         </transition>
         <transition name="rightSlide">
-            <img v-if="showImg" class="img" src="../assets/Portrait/Självporträttlol.jpg" alt="Självporträtt">
+            <img v-if="showHeroSection" class="img" src="../assets/Portrait/Självporträttlol.jpg" alt="Självporträtt">
         </transition>
     </div>
     <transition name="fadeOut">
@@ -34,33 +33,36 @@ export default {
     data() {
         return {
             showIntro: true,
-            showImg: false,
-            showHeader: false,
+            showHeroSection:false,
             testdb: [],
         }
     },
     created() {
         this.AnimationDuration();
-
         fetch('https://williamali.se/php/')
 
             .then((response) => response.json())
             .then((data) => {
                 this.testdb = data;
-                console.log(this.testdb);
+                console.table(this.testdb);
             });
     },
 
     methods: {
         AnimationDuration() {
-
+            if(!this.isMobileView)
             setTimeout(() => {
                 this.showIntro = false;
                 setTimeout(() => {
-                    this.showImg = true;
-                    this.showHeader = true;
+                    this.showHeroSection = true;
                 }, 500)
             }, 3000);
+            else if(this.isMobileView) {
+                this.showIntro = false;
+                setTimeout(() => {
+                    this.showHeroSection = true;    
+                }, 250);
+            }
         }
     }
 }
@@ -99,17 +101,18 @@ export default {
 
 .hero-container h1
 {
-    margin-top: 250px;
-    font-size: 55px;
+    margin-top: 300px;
+    font-size: 40px;
     width: 50%;
 }
 
 .hero-container p
 {
     margin-top: 50px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 35px;
+    width:90%;
 }
 
 .img
@@ -215,6 +218,7 @@ export default {
         font-weight: 300;
         line-height: 30px;
         text-align: center;
+        width: 100%;
     }
 
     .img
@@ -224,28 +228,6 @@ export default {
         height: 300px;
         border-radius: 300px;
         object-fit: cover;
-    }
-
-    .typing
-    {
-        position: absolute;
-        top: 400px;
-        display: flex;
-        justify-content: center;
-        overflow: auto;
-        width: 100%;
-        height: 2.8vh;
-    }
-
-    .typing-effect
-    {
-        width: 41ch;
-        animation: typing 2.5s steps(41), effect .5s;
-        white-space: nowrap;
-        border-right: 3px solid;
-        font-family: Kodchasan;
-        font-weight: 900;
-        font-size: 0.9em;
     }
 }
 
