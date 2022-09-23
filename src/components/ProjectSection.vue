@@ -5,7 +5,7 @@
     <div class="container">
         <div @click="SetElementVisible(project.id)" class="project-card" v-for="project in projects" :key="project.id">
             <h2>{{ project.title }}</h2>
-            <img class="main-image" :src="project.defaultImg" alt="project bild">
+            <img class="main-image" :src="project.imgMini" alt="project bild">
             <section class="aling-text-section">
                 <a @click="linkedPressed()" :href="project.githubLink" target="blank" alt="link to github">Github link:
                     klicka här</a>
@@ -110,8 +110,8 @@ export default {
                 {
                     id: 0,
                     title: 'Väder applikation',
+                    imgMini: require('@/assets/Projectbilder/WheaterApp/Mini.png'),
                     img: require('@/assets/Projectbilder/WheaterApp/Home-cloudy.png'),
-                    defaultImg: require('@/assets/Projectbilder/WheaterApp/Home-cloudy.png'),
                     description: 'En väder applikation som använder gps lokalisering för att visa väder information för staden du är i, Du kan även fylla i en stad du väljer själv och få tillbaka väder information för dagen och dom 7 kommande dagarna',
                     overcommings: 'Det svåraste med det här projeket var nog att hantera vilken information jag behövde från api och hur man kommer åt den. Man fick tillbaka väldigt många object som i sin tur hade ett par object inom sig själva. När jag väl listat ut hur jag skulle separera information från dom olika objekten var det inga problem!',
                     githubLink: 'https://github.com/prodigystudios/weatherapp',
@@ -143,7 +143,7 @@ export default {
                 {
                     id: 1,
                     title: 'Att göra lista',
-                    defaultImg: require('@/assets/Projectbilder/Att göra lista/Home-uncleared.png'),
+                    imgMini: require('@/assets/Projectbilder/Att göra lista/Mini.png'),
                     img: require('@/assets/Projectbilder/Att göra lista/Home-uncleared.png'),
                     description: 'En enkel att göra lista där du kan lägga till saker som du behöver göra. Markera avklarade uppgifter eller ta bort dom helt när du är klar!',
                     overcommings: 'Det svåraste i den här projeket var att få firebase att fungera. Det var första gången jag använt den tjänsten. Dokumentationen på deras hemsida var väldigt lättläst och efter ett par timmar hade jag en fungerande version med deras databas',
@@ -179,7 +179,7 @@ export default {
                 {
                     id: 2,
                     title: 'WebShop',
-                    defaultImg: require('@/assets/Projectbilder/WebShop/Home.png'),
+                    imgMini: require('@/assets/Projectbilder/WebShop/Mini.png'),
                     img: require('@/assets/Projectbilder/WebShop/Home.png'),
                     description: 'En enkel att göra lista där du kan lägga till saker som du behöver göra. Markera avklarade uppgifter eller ta bort dom helt när du är klar!',
                     overcommings: 'Det svåraste i den här projeket var att få firebase att fungera. Det var första gången jag använt den tjänsten. Dokumentationen på deras hemsida var väldigt lättläst och efter ett par timmar hade jag en fungerande version med deras databas',
@@ -367,12 +367,15 @@ a
     font-size: 22px;
 }
 
+
 .main-image
 {
-    width: 400px;
-    height: 300px;
+    height:300px;
+    width:450px;
     border: solid 1.50px black;
     border-radius: 25px;
+    
+
 }
 
 .sub-container
