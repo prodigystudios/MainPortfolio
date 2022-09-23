@@ -6,12 +6,14 @@
                     Mitt namn är William Ali, 29 årig utvecklare från sverige.<br />
                     Har jobbat inom byggbranchen i över 10 och är nu på min resa att byta karriär till utvecklare!<br />
                     Har länge haft intresse för att skapa saker och skapade egen musik under hela min uppväxt.<br />
-                    Har alltid tyckt att programmering varit intressant och alltid velat pröva på att göra ett eget spel <br/>
-                    och det har nu lett mig in på webutveckling, både som front-end och back-end!</p>
+                    Har alltid tyckt att programmering varit intressant och alltid velat pröva på att göra ett eget spel
+                    <br />
+                    och det har nu lett mig in på webbutveckling, både som front-end och back-end!
+                </p>
             </h1>
         </transition>
         <transition name="rightSlide">
-            <img v-if="showHeroSection" class="img" src="../assets/Portrait/Självporträttlol.jpg" alt="Självporträtt">
+            <img v-if="showHeroSection" class="img" src="../assets/Portrait/Jag-redigerad.png" alt="Självporträtt">
         </transition>
     </div>
     <transition name="fadeOut">
@@ -32,35 +34,37 @@ export default {
 
     data() {
         return {
-            showIntro: true,
-            showHeroSection:false,
+            showIntro: false,
+            showHeroSection: false,
             testdb: [],
         }
     },
-    created() {
-        this.AnimationDuration();
-        fetch('https://williamali.se/php/')
-
-            .then((response) => response.json())
-            .then((data) => {
-                this.testdb = data;
-                console.table(this.testdb);
-            });
+    mounted() {
+        if (!this.isMobileView) {
+            setTimeout(() => {
+                this.showIntro = true;
+                setTimeout(() => {
+                    this.AnimationDuration();
+                }, 1500)
+            }, 1000);
+        }else {
+            this.AnimationDuration();
+        }
     },
-
     methods: {
         AnimationDuration() {
-            if(!this.isMobileView)
-            setTimeout(() => {
+            if (!this.isMobileView) {
+                setTimeout(() => {
+                    this.showIntro = false;
+                    setTimeout(() => {
+                        this.showHeroSection = true;
+                    }, 500)
+                }, 3000);
+            }
+            else if (this.isMobileView) {
                 this.showIntro = false;
                 setTimeout(() => {
                     this.showHeroSection = true;
-                }, 500)
-            }, 3000);
-            else if(this.isMobileView) {
-                this.showIntro = false;
-                setTimeout(() => {
-                    this.showHeroSection = true;    
                 }, 250);
             }
         }
@@ -73,7 +77,7 @@ export default {
     position: absolute;
     top: 400px;
     display: flex;
-    width: 100%;
+    width: 110%;
     height: 7vh;
     justify-content: center;
 }
@@ -112,15 +116,15 @@ export default {
     font-size: 18px;
     font-weight: 400;
     line-height: 35px;
-    width:90%;
+    width: 90%;
 }
 
 .img
 {
     margin-top: 250px;
     width: 484px;
-    height: 451px;
-    border-radius: 300px;
+    height: 484px;
+    border-radius: 500px;
     object-fit: cover;
 }
 
@@ -223,11 +227,12 @@ export default {
 
     .img
     {
-        margin-bottom: 50px;
-        width: 300px;
-        height: 300px;
+        margin-top:20px;
+        margin-bottom: 10px;
+        width: 350px;
+        height: 340px;
         border-radius: 300px;
-        object-fit: cover;
+        object-fit: fill;
     }
 }
 

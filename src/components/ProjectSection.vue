@@ -143,18 +143,18 @@ export default {
                 {
                     id: 1,
                     title: 'Att göra lista',
-                    defaultImg: require('@/assets/Projectbilder/Att göra lista/Main.png'),
-                    img: require('@/assets/Projectbilder/Att göra lista/Main.png'),
+                    defaultImg: require('@/assets/Projectbilder/Att göra lista/Home-uncleared.png'),
+                    img: require('@/assets/Projectbilder/Att göra lista/Home-uncleared.png'),
                     description: 'En enkel att göra lista där du kan lägga till saker som du behöver göra. Markera avklarade uppgifter eller ta bort dom helt när du är klar!',
                     overcommings: 'Det svåraste i den här projeket var att få firebase att fungera. Det var första gången jag använt den tjänsten. Dokumentationen på deras hemsida var väldigt lättläst och efter ett par timmar hade jag en fungerande version med deras databas',
                     githubLink: 'https://github.com/prodigystudios/todo-firebase',
                     liveLink: 'https://williamali.se/todo/#/',
                     imageSelector: [
                         {
-                            img: require('@/assets/Projectbilder/WebShop/Home.png'),
+                            img: require('@/assets/Projectbilder/Att göra lista/Home-cleared.png'),
                         },
                         {
-                            img: require('@/assets/Projectbilder/WebShop/KöpView.png'),
+                            img: require('@/assets/Projectbilder/Att göra lista/Home-uncleared.png'),
                         },
 
                     ],
